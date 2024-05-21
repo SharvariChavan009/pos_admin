@@ -27,6 +27,7 @@ class SidebarPageState extends State<SidebarPage> {
     return [
       CollapsibleItem(
         text: 'Dashboard',
+        icon: Icons.home,
         // iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {
