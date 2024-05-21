@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage>
         children: [
           const SidebarPage(),
           buildContentColumn(context, tabController),
-          buildBlueColumn(),
+          // buildBlueColumn(),
         ],
       ),
     );

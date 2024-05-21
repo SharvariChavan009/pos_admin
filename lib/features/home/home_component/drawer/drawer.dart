@@ -27,8 +27,7 @@ class SidebarPageState extends State<SidebarPage> {
     return [
       CollapsibleItem(
         text: 'Dashboard',
-        icon: Icons.home,
-        // iconImage: AllIcons.home,
+        iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context)
@@ -39,7 +38,7 @@ class SidebarPageState extends State<SidebarPage> {
       ),
       CollapsibleItem(
         text: 'User',
-        // iconImage: AllIcons.menu,
+        iconImage: AllIcons.menu,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context)
           //     .add(MenuNameSelected(context: context, menuName: "Menu"));
@@ -49,7 +48,7 @@ class SidebarPageState extends State<SidebarPage> {
       ),
       CollapsibleItem(
         text: 'Tenants',
-        // iconImage: AllIcons.order,
+        iconImage: AllIcons.order,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context)
           //     .add(MenuNameSelected(context: context, menuName: "Orders"));
@@ -59,18 +58,8 @@ class SidebarPageState extends State<SidebarPage> {
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
       CollapsibleItem(
-        text: 'Tax',
-        // iconImage: AllIcons.payment,
-        onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context)
-          //     .add(MenuNameSelected(context: context, menuName: "Payment"));
-        },
-        onHold: () => ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Face"))),
-      ),
-      CollapsibleItem(
         text: 'Roles',
-        // iconImage: AllIcons.olOrder,
+        iconImage: AllIcons.olOrder,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context).add(
           //     MenuNameSelected(context: context, menuName: "Online Orders"));
@@ -80,7 +69,7 @@ class SidebarPageState extends State<SidebarPage> {
       ),
       CollapsibleItem(
         text: 'Permissions',
-        // iconImage: AllIcons.table_check,
+        iconImage: AllIcons.table_check,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context).add(
           //     MenuNameSelected(context: context, menuName: "Staff Attendance"));
@@ -90,7 +79,7 @@ class SidebarPageState extends State<SidebarPage> {
       ),
       CollapsibleItem(
         text: 'Logout',
-        // iconImage: AllIcons.setting,
+        iconImage: AllIcons.setting,
         onPressed: () {
           // BlocProvider.of<MenuNameBloc>(context)
           //     .add(MenuNameSelected(context: context, menuName: "Setting"));
