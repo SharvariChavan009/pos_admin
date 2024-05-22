@@ -29,19 +29,9 @@ class _HomePageState extends State<HomePage>
         children: [
           const SidebarPage(),
           buildContentColumn(context, tabController),
-          // buildBlueColumn(),
         ],
       ),
     );
   }
-}
-
-Widget buildBlueColumn() {
-  return Expanded(
-    flex: 1,
-    child: Container(
-      color: Colors.blue,
-    ),
-  );
 }
 
