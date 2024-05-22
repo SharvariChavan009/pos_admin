@@ -1,10 +1,15 @@
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar/collapsible_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
+import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_bloc.dart';
 
 import '../../../../core/common/colors.dart';
+import '../../presentation/bloc/menu_name_bloc.dart';
+import '../../presentation/bloc/menu_name_event.dart';
+import '../../presentation/bloc/user_list/user_list_event.dart';
 
 class SidebarPage extends StatefulWidget {
   const SidebarPage({super.key});
@@ -30,8 +35,8 @@ class SidebarPageState extends State<SidebarPage> {
         iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context)
-          //     .add(MenuNameSelected(context: context, menuName: "Home"));
+          BlocProvider.of<MenuNameBloc>(context)
+              .add(MenuNameSelected(context: context, menuName: "Dashboard"));
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -40,8 +45,10 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'User',
         iconImage: AllIcons.menu,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context)
-          //     .add(MenuNameSelected(context: context, menuName: "Menu"));
+          BlocProvider.of<MenuNameBloc>(context)
+              .add(MenuNameSelected(context: context, menuName: "User"));
+          BlocProvider.of<UserListBloc>(context)
+              .add(UserListFetch());
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -50,9 +57,8 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'Tenants',
         iconImage: AllIcons.order,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context)
-          //     .add(MenuNameSelected(context: context, menuName: "Orders"));
-          // BlocProvider.of<OrderListBloc>(context).add(OrderListShowEvent());
+          BlocProvider.of<MenuNameBloc>(context)
+              .add(MenuNameSelected(context: context, menuName: "Tenants"));
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -61,8 +67,8 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'Roles',
         iconImage: AllIcons.olOrder,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context).add(
-          //     MenuNameSelected(context: context, menuName: "Online Orders"));
+          BlocProvider.of<MenuNameBloc>(context).add(
+              MenuNameSelected(context: context, menuName: "Roles"));
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -71,8 +77,8 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'Permissions',
         iconImage: AllIcons.table_check,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context).add(
-          //     MenuNameSelected(context: context, menuName: "Staff Attendance"));
+          BlocProvider.of<MenuNameBloc>(context).add(
+              MenuNameSelected(context: context, menuName: "Permissions"));
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -81,8 +87,8 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'Logout',
         iconImage: AllIcons.setting,
         onPressed: () {
-          // BlocProvider.of<MenuNameBloc>(context)
-          //     .add(MenuNameSelected(context: context, menuName: "Setting"));
+          BlocProvider.of<MenuNameBloc>(context)
+              .add(MenuNameSelected(context: context, menuName: "Logout"));
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
