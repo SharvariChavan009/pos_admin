@@ -4,11 +4,10 @@ import 'package:pos_admin/core/routes/router.dart';
 import 'package:pos_admin/features/auth/presentation/bloc/email_validation/email_validation_bloc.dart';
 import 'package:pos_admin/features/auth/presentation/login_page.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_bloc.dart';
-
 import 'core/common/colors.dart';
 import 'features/auth/domain/repository/login_repository.dart';
 import 'features/auth/presentation/bloc/password_validation/password_validation_bloc.dart';
+import 'features/home/users/bloc/user_list/user_list_bloc.dart';
 
 void main() {
   runApp(const MyApp());

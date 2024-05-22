@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_bloc.dart';
-
 import '../../../../core/common/colors.dart';
 import '../../presentation/bloc/menu_name_bloc.dart';
 import '../../presentation/bloc/menu_name_event.dart';
-import '../../presentation/bloc/user_list/user_list_event.dart';
+import '../../users/bloc/user_list/user_list_bloc.dart';
+import '../../users/bloc/user_list/user_list_event.dart';
 
 class SidebarPage extends StatefulWidget {
   const SidebarPage({super.key});
