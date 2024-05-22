@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/core/common/widgets/custom_snackbar.dart';
-import 'package:pos_admin/features/home/data/users/user_data.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_bloc.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_state.dart';
-
-import '../../../core/common/colors.dart';
-import '../../../core/common/widgets/label.dart';
+import 'package:pos_admin/features/home/users/data/user_data.dart';
+import '../../../../core/common/colors.dart';
+import '../../../../core/common/widgets/label.dart';
+import '../bloc/user_list/user_list_bloc.dart';
+import '../bloc/user_list/user_list_state.dart';
 
 class MenuListSetting extends StatefulWidget {
   const MenuListSetting({super.key});
@@ -24,7 +23,7 @@ class MenuListSettingState extends State<MenuListSetting> {
   bool _selectAll = false;
   Image imageUrl = Image.asset('assets/image/pizza.webp');
 
-  List<UserData> menus = [
+  List<UserData> users = [
   ];
 
   @override
@@ -39,7 +38,7 @@ class MenuListSettingState extends State<MenuListSetting> {
       child: BlocBuilder<UserListBloc, UserListState>(
         builder: (context, state) {
           if(state is UserListSuccessState){
-            menus = state.users!;
+            users = state.users!;
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +80,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                             setState(() {
                               _selectAll = value ?? false;
                               // Update the selection status of each row
-                              for (var menu in menus) {
+                              for (var menu in users) {
                                 // menu['selected'] = _selectAll;
                               }
                             });
@@ -106,10 +105,10 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              menus.sort((a, b) =>
+                              users.sort((a, b) =>
                                   a.name.compareTo(b.name));
                             } else {
-                              menus.sort((a, b) =>
+                              users.sort((a, b) =>
                                   b.name.compareTo(a.name));
                             }
                           });
@@ -127,11 +126,11 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              menus.sort(
+                              users.sort(
                                       (a, b) =>
                                       a.email.compareTo(b.email));
                             } else {
-                              menus.sort(
+                              users.sort(
                                       (a, b) =>
                                       b.email.compareTo(a.email));
                             }
@@ -150,11 +149,11 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              menus.sort(
+                              users.sort(
                                       (a, b) =>
                                       a.phone.compareTo(b.phone));
                             } else {
-                              menus.sort(
+                              users.sort(
                                       (a, b) =>
                                       b.phone.compareTo(a.phone));
                             }
@@ -236,7 +235,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         },
                       ),
                     ],
-                    source: OrderDataSource(menus),
+                    source: OrderDataSource(users),
                   ),
                 ),
               ),

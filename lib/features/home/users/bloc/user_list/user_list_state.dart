@@ -1,4 +1,4 @@
-import '../../../data/users/user_data.dart';
+import '../../data/user_data.dart';
 
 abstract class UserListState{}
 

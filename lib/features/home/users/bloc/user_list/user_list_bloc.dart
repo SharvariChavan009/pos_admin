@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_event.dart';
-import 'package:pos_admin/features/home/presentation/bloc/user_list/user_list_state.dart';
+import 'package:pos_admin/features/home/users/bloc/user_list/user_list_event.dart';
+import 'package:pos_admin/features/home/users/bloc/user_list/user_list_state.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../../../core/common/api_constants.dart';
-import '../../../data/users/user_data.dart';
+import '../../data/user_data.dart';
 
 
 class UserListBloc extends Bloc<UserListEvent, UserListState> {

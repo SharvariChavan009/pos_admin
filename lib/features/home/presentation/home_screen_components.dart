@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,9 @@ import '../../../core/common/images/images_constant.dart';
 import '../../../core/common/widgets/icon.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
-import 'order_list.dart';
+import '../users/presentation/new_user_creation.dart';
+import '../users/presentation/user_list.dart';
+import 'bloc/menu_name_event.dart';
 
 Widget buildContentColumn(context, TabController tabController) {
   return Expanded(
@@ -53,16 +56,63 @@ Widget headerPart(context) {
           ),
           Expanded(
             flex: 2,
-            child: AutoSizeText(
-              'User',
-              textAlign: TextAlign.left,
-              minFontSize: 12,
-              maxFontSize: 16,
-              style: CustomLabels.textTextStyle(
-                  color: AppColors.whiteColor),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              presetFontSizes: const [24],
+            child: BlocBuilder<MenuNameBloc, MenuNameState>(
+              builder: (context, state) {
+                String Name = "";
+                String Listname = "";
+                if(state is MenuNameFetchedSuccess){
+
+                  print(state.name);
+                  if (state.name == "User"){
+                    Name = "List";
+                  }else{
+                    Name = state.name;
+                  }
+                }
+                return Row(
+                  children: [
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<MenuNameBloc>(context).add(
+                            MenuNameSelected(
+                                context: context, menuName: 'User'));
+                     },
+                        child: const Text(
+                      'Users',
+                      style: TextStyle(
+                        letterSpacing: .8,
+                        color: AppColors.whiteColor,
+                        fontFamily: CustomLabels.primaryFont,
+                        fontWeight: CustomLabels.mediumFontWeight,
+                        fontSize: 18,
+                      ),
+                    )
+                    ),
+                    const SizedBox(width: 5),
+                    const Icon(
+                      Icons.arrow_forward_ios_sharp,
+                      color: AppColors.iconColor,
+                      size: 16,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                     Text(
+                      Name == "" ? 'List': Name,
+                      style: const TextStyle(
+                        letterSpacing: .8,
+                        color: AppColors.whiteColor,
+                        fontFamily: CustomLabels.primaryFont,
+                        fontWeight: CustomLabels.mediumFontWeight,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Flexible(
@@ -70,8 +120,7 @@ Widget headerPart(context) {
             flex: DeviceUtils.getDeviceDimension(context).width > 1000 ? 4 : 0,
             child: Container(),
           ),
-
-           Expanded(
+          Expanded(
             flex: 2,
             child: FittedBox(
               fit: BoxFit.fitWidth,
@@ -87,9 +136,11 @@ Widget headerPart(context) {
                     textStyle: CustomLabels.bodyTextStyle(
                         fontSize: 14, color: AppColors.whiteColor),
                     onPressed: () {
+                      BlocProvider.of<MenuNameBloc>(context).add(
+                          MenuNameSelected(
+                              context: context, menuName: 'Create User'));
                     },
                   ),
-
                   const SizedBox(
                     width: 10,
                   ),
@@ -102,6 +153,7 @@ Widget headerPart(context) {
     ),
   );
 }
+
 Widget middleBody(TabController tabController) {
   return Expanded(
     flex: 10,
@@ -116,20 +168,24 @@ Widget middleBody(TabController tabController) {
       child: BlocBuilder<MenuNameBloc, MenuNameState>(
         builder: (context, state) {
           String menuName = "";
-          if (state is MenuNameFetchedSuccess){
+          if (state is MenuNameFetchedSuccess) {
             menuName = state.name;
           }
-          switch(menuName){
+          switch (menuName) {
             case "User":
-              return  const Column(
-              children: [
-                Expanded(
-                  child: MenuListSetting(),
-                )
-              ],
-            );
+              return  Column(
+                children: [
+                  Container(
+                    height: 40,
+                    color: Colors.cyan,
+                  ),
+                  Expanded(
+                    child: MenuListSetting(),
+                  )
+                ],
+              );
             case "Dashboard":
-              return  const Column(
+              return const Column(
                 children: [
                   Expanded(
                     flex: 11,
@@ -138,16 +194,19 @@ Widget middleBody(TabController tabController) {
                 ],
               );
             case "Tenants":
-              return  const Column(
+              return  Column(
                 children: [
+                  Container(
+                    height: 40,
+                    color: Colors.cyan,
+                  ),
                   Expanded(
-                    flex: 11,
-                    child: Text("Tables list"),
+                    child: MenuListSetting(),
                   )
                 ],
               );
             case "Roles":
-              return  const Column(
+              return const Column(
                 children: [
                   Expanded(
                     flex: 11,
@@ -155,35 +214,43 @@ Widget middleBody(TabController tabController) {
                   )
                 ],
               );
-              case "Permissions":
-                return  const Column(
-                  children: [
-                    Expanded(
-                      flex: 11,
-                      child: Text("Tables list"),
-                    )
-                  ],
-                );
-            case "Logout":
-              return  const Column(
+            case "Permissions":
+              return const Column(
                 children: [
                   Expanded(
                     flex: 11,
                     child: Text("Tables list"),
+                  )
+                ],
+              );
+            case "Logout":
+              return const Column(
+                children: [
+                  Expanded(
+                    flex: 11,
+                    child: Text("Tables list"),
+                  )
+                ],
+              );
+            case "Create User":
+              return  const Column(
+                children: [
+                  Expanded(
+                    flex: 11,
+                    child: NewUser(),
                   )
                 ],
               );
             default:
-              return  const Column(
-              children: [
-                Expanded(
-                  flex: 11,
-                  child: Text("Tables list"),
-                )
-              ],
-            );
+              return const Column(
+                children: [
+                  Expanded(
+                    flex: 11,
+                    child: Text("Tables list"),
+                  )
+                ],
+              );
           }
-
         },
       ),
     ),
