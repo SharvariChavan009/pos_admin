@@ -4,8 +4,9 @@ abstract class UserListState{}
 
 final class UserListInitialState extends UserListState{}
 
+final class UserListLoadingState extends UserListState{}
 final class UserListSuccessState extends UserListState{
-  List<UserData>? users;
+  List<User>? users;
   UserListSuccessState({required this.users});
 }
 

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_bloc.dart';
 import '../../../../core/common/colors.dart';
 import '../../presentation/bloc/menu_name_bloc.dart';
 import '../../presentation/bloc/menu_name_event.dart';
+import '../../tenants/bloc/tenant_list/tenant_list_event.dart';
 import '../../users/bloc/user_list/user_list_bloc.dart';
 import '../../users/bloc/user_list/user_list_event.dart';
 
@@ -58,6 +60,8 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Tenants"));
+          BlocProvider.of<TenantListBloc>(context)
+              .add(TenantListFetch());
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),

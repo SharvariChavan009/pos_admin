@@ -3,19 +3,19 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_event.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_state.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_event.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_state.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
 import '../../../../../core/common/api_constants.dart';
-import '../../data/user_data.dart';
+import '../../data/tenant_data.dart';
 
 
-class UserListBloc extends Bloc<UserListEvent, UserListState> {
+
+class TenantListBloc extends Bloc<TenantListEvent, TenantListState> {
   final Dio _dio = Dio();
-  var url= ApiConstants.apiUserList;
+  var url= ApiConstants.apiTenantList;
   String? _accessToken;
-  UserListBloc() : super(UserListInitialState()) {
+  TenantListBloc() : super(TenantListInitialState()) {
     _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
@@ -24,7 +24,7 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
       error: true,
       compact: true,
     ));
-    on<UserListFetch>((event, emit) async {
+    on<TenantListFetch>((event, emit) async {
       var box = await Hive.openBox('userData');
       _accessToken = box.get("accessToken");
       try {
@@ -39,13 +39,13 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
         );
         if (response.statusCode == 200) {
           final dynamic responseData = response.data;
-           List<User> users = usersFromJson(json.encode(response.data));
-          emit(UserListSuccessState(users: users));
+          List<Tenant> tenants = usersFromJson(json.encode(response.data));
+          emit(TenantListSuccessState(tenant: tenants));
         } else {
-          emit(UserListFailureState());
+          emit(TenantListFailureState());
         }
       } catch (error) {
-        emit(UserListFailureState());
+        emit(TenantListFailureState());
       }
     });
   }

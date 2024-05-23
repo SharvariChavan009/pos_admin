@@ -179,8 +179,8 @@ Widget middleBody(TabController tabController) {
                     height: 40,
                     color: Colors.cyan,
                   ),
-                  Expanded(
-                    child: MenuListSetting(),
+                  const Expanded(
+                    child: UserListSetting(),
                   )
                 ],
               );
@@ -200,8 +200,8 @@ Widget middleBody(TabController tabController) {
                     height: 40,
                     color: Colors.cyan,
                   ),
-                  Expanded(
-                    child: MenuListSetting(),
+                  const Expanded(
+                    child: UserListSetting(),
                   )
                 ],
               );

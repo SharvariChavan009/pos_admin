@@ -7,24 +7,26 @@ import 'package:pos_admin/features/home/users/data/user_data.dart';
 import '../../../../core/common/colors.dart';
 import '../../../../core/common/widgets/label.dart';
 import '../../widget/data_table.dart';
-import '../bloc/user_list/user_list_bloc.dart';
-import '../bloc/user_list/user_list_state.dart';
+import '../bloc/tenant_list/tenant_list_bloc.dart';
+import '../bloc/tenant_list/tenant_list_state.dart';
+import '../data/tenant_data.dart';
 
-class UserListSetting extends StatefulWidget {
-  const UserListSetting({super.key});
+
+class TenantListSetting extends StatefulWidget {
+  const TenantListSetting({super.key});
 
   @override
-  UserListSettingState createState() => UserListSettingState();
+  TenantListSettingState createState() => TenantListSettingState();
 }
 
-class UserListSettingState extends State<UserListSetting> {
+class TenantListSettingState extends State<TenantListSetting> {
   int _rowsPerPage = 10;
   int _sortColumnIndex = 0;
   bool _sortAscending = true;
   bool _selectAll = false;
   Image imageUrl = Image.asset('assets/image/pizza.webp');
 
-  List<User> users = [
+  List<Tenant> users = [
   ];
 
   @override
@@ -36,15 +38,15 @@ class UserListSettingState extends State<UserListSetting> {
                   (states) => AppColors.primaryColor),
         ),
       ),
-      child: BlocBuilder<UserListBloc, UserListState>(
+      child: BlocBuilder<TenantListBloc, TenantListState>(
         builder: (context, state) {
-          if(state is UserListLoadingState){
+          if(state is TenantListLoadingState){
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }else if(state is UserListSuccessState){
-            print("users = ${state.users!.length}");
-            users = state.users!;
+          }else if(state is TenantListSuccessState){
+            print("tenant = ${state.tenant!.length}");
+            users = state.tenant!;
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +55,7 @@ class UserListSettingState extends State<UserListSetting> {
                 flex: 10,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: PageTable(users: users,menuName: "User"),
+                  child: PageTable(users: users, menuName: 'Tenants',),
                 ),
               ),
             ],
