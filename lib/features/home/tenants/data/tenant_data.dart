@@ -58,7 +58,7 @@ class Tenant {
   }
 }
 
-List<Tenant> usersFromJson(String str) {
+List<Tenant> tenantsFromJson(String str) {
   final jsonData = json.decode(str);
   return List<Tenant>.from(jsonData['data'].map((x) => Tenant.fromJson(x)));
 }

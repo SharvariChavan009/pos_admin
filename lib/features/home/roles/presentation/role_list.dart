@@ -1,27 +1,34 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_admin/core/common/images/images_constant.dart';
+import 'package:pos_admin/core/common/widgets/custom_snackbar.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_state.dart';
+import 'package:pos_admin/features/home/roles/data/role_data.dart';
+import 'package:pos_admin/features/home/users/data/user_data.dart';
 import '../../../../core/common/colors.dart';
-import '../../../../core/common/images/images_constant.dart';
 import '../../../../core/common/widgets/label.dart';
 import '../../presentation/bloc/menu_name_bloc.dart';
 import '../../presentation/bloc/menu_name_event.dart';
 import '../../widget/data_table.dart';
-import '../bloc/tenant_list/tenant_list_bloc.dart';
-import '../bloc/tenant_list/tenant_list_state.dart';
-import '../data/tenant_data.dart';
 
 
-class TenantListSetting extends StatefulWidget {
-  const TenantListSetting({super.key});
+class RoleListSetting extends StatefulWidget {
+  const RoleListSetting({super.key});
 
   @override
-  TenantListSettingState createState() => TenantListSettingState();
+  RoleListSettingState createState() => RoleListSettingState();
 }
 
-class TenantListSettingState extends State<TenantListSetting> {
+class RoleListSettingState extends State<RoleListSetting> {
+  int _rowsPerPage = 10;
+  int _sortColumnIndex = 0;
+  bool _sortAscending = true;
+  bool _selectAll = false;
   Image imageUrl = Image.asset('assets/image/pizza.webp');
 
-  List<Tenant> tenants = [
+  List<Role> roles = [
   ];
 
   @override
@@ -33,15 +40,16 @@ class TenantListSettingState extends State<TenantListSetting> {
                   (states) => AppColors.primaryColor),
         ),
       ),
-      child:
-      BlocBuilder<TenantListBloc, TenantListState>(
+      child: BlocBuilder<RoleListBloc, RoleListState>(
         builder: (context, state) {
-          print("tenent bloc");
-          if(state is TenantListSuccessState){
-            print("Success state");
-            tenants = state.tenants!;
+          if(state is RoleListLoadingState){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }else if(state is RoleListSuccessState){
+            print("Role = ${state.role!.length}");
+            roles = state.role!;
           }
-
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,7 +57,7 @@ class TenantListSettingState extends State<TenantListSetting> {
                 flex: 10,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: PageTableTenant(users: tenants, menuName: 'Tenants',),
+                  child: PageTable(users: roles, menuName: 'Role',),
                 ),
               ),
             ],
@@ -61,23 +69,22 @@ class TenantListSettingState extends State<TenantListSetting> {
 }
 
 
-class PageTableTenant extends StatefulWidget {
-  List<Tenant> users;
-  String menuName;
 
-  PageTableTenant({required this.menuName, required this.users, super.key});
+class PageTable extends StatefulWidget {
+  List<Role> users;
+  String menuName;
+  PageTable({required this.menuName, required this.users, super.key});
 
   @override
-  State<PageTableTenant> createState() => PageTableTenantState();
+  State<PageTable> createState() => _PageTableState();
 }
 
-class PageTableTenantState extends State<PageTableTenant> {
+class _PageTableState extends State<PageTable> {
   int? _rowsPerPage = 10;
   int _sortColumnIndex = 0;
   bool _sortAscending = true;
   bool _selectAll = false;
   Image imageUrl = Image.asset('assets/image/pizza.webp');
-
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
@@ -88,7 +95,7 @@ class PageTableTenantState extends State<PageTableTenant> {
       headingRowColor:
       MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
       arrowHeadColor: AppColors.secondaryColor,
-      columnSpacing: 35,
+      columnSpacing: 100,
       rowsPerPage: _rowsPerPage!,
       onRowsPerPageChanged: (value) {
         setState(
@@ -118,14 +125,6 @@ class PageTableTenantState extends State<PageTableTenant> {
             },
           ),
         ),
-        const DataColumn(
-          label: Text(
-            'Image',
-            style: TextStyle(
-                color: AppColors.iconColor,
-                fontFamily: CustomLabels.primaryFont),
-          ),
-        ),
         DataColumn(
           label: const Text(
             'Name',
@@ -145,65 +144,7 @@ class PageTableTenantState extends State<PageTableTenant> {
             });
           },
         ),
-        const DataColumn(
-          label: Text(
-            'Website',
-            style: TextStyle(
-                color: AppColors.iconColor,
-                fontFamily: CustomLabels.primaryFont),
-          ),
-          // onSort: (columnIndex, ascending) {
-          //   setState(() {
-          //     _sortColumnIndex = columnIndex;
-          //     _sortAscending = ascending;
-          //     if (ascending) {
-          //       widget.users.sort((a, b) => a.email!.compareTo(b.email!));
-          //     } else {
-          //       widget.users.sort((a, b) => b.email!.compareTo(a.email!));
-          //     }
-          //   });
-          // },
-        ),
-        const DataColumn(
-          label: Text(
-            'Units',
-            style: TextStyle(
-                color: AppColors.iconColor,
-                fontFamily: CustomLabels.primaryFont),
-          ),
-          // onSort: (columnIndex, ascending) {
-          //   setState(() {
-          //     _sortColumnIndex = columnIndex;
-          //     _sortAscending = ascending;
-          //     if (ascending) {
-          //       widget.users.sort((a, b) => a.phone!.compareTo(b.phone!));
-          //     } else {
-          //       widget.users.sort((a, b) => b.phone!.compareTo(a.phone!));
-          //     }
-          //   });
-          // },
-        ),
-        DataColumn(
-          label: const Text(
-            'Active',
-            style: TextStyle(
-                color: AppColors.iconColor,
-                fontFamily: CustomLabels.primaryFont),
-          ),
-          onSort: (columnIndex, ascending) {
-            setState(() {
-              _sortColumnIndex = columnIndex;
-              _sortAscending = ascending;
-              // if (ascending) {
-              //   menus.sort((a, b) =>
-              //       a.active.compareTo(b.active));
-              // } else {
-              //   menus.sort((a, b) =>
-              //       b['guestName'].compareTo(a['guestName']));
-              // }
-            });
-          },
-        ),
+
         DataColumn(
           label: const Text(
             '',
@@ -227,16 +168,15 @@ class PageTableTenantState extends State<PageTableTenant> {
           },
         ),
       ],
-      source: OrderDataSource(widget.users, context),
+      source: OrderDataSource(widget.users,context),
     );
   }
 }
 
 class OrderDataSource extends DataTableSource {
-  final List<Tenant> orders;
+  final List<Role> orders;
   BuildContext context;
-
-  OrderDataSource(this.orders, this.context);
+  OrderDataSource(this.orders,this.context);
 
   @override
   DataRow? getRow(int index) {
@@ -264,16 +204,6 @@ class OrderDataSource extends DataTableSource {
             ),
           ),
           DataCell(
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: Image.asset(
-                AppImages.backgroundImage,
-                width: 50,
-                height: 50,
-              ),
-            ),
-          ),
-          DataCell(
             Text(
               order.name.toString(),
               style: const TextStyle(
@@ -281,34 +211,10 @@ class OrderDataSource extends DataTableSource {
                   color: AppColors.whiteColor),
             ),
           ),
-          DataCell(
-            Text(
-              order.website.toString(),
-              style: const TextStyle(
-                  fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.secondaryColor),
-            ),
-          ),
-          const DataCell(Text(
-            "units data",
-            style: TextStyle(
-                fontFamily: CustomLabels.primaryFont,
-                color: AppColors.whiteColor),
-          )),
-          DataCell(order.active
-              ? const Icon(
-            Icons.check_circle_outline,
-            color: Colors.green,
-          )
-              : const Icon(
-            Icons.cancel_outlined,
-            color: Colors.red,
-          )),
           DataCell(InkWell(
-              onTap: () {
+              onTap: (){
                 print("view clicked");
-                BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "View"));
+                BlocProvider.of<MenuNameBloc>(context).add(MenuNameSelected(context: context, menuName: "View"));
               },
               child: const Row(children: [
                 Icon(
@@ -324,9 +230,8 @@ class OrderDataSource extends DataTableSource {
                 ),
               ]))),
           DataCell(InkWell(
-              onTap: () {
-                BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "Edit"));
+              onTap: (){
+                BlocProvider.of<MenuNameBloc>(context).add(MenuNameSelected(context: context, menuName: "Edit"));
               },
               child: const Row(children: [
                 Icon(
@@ -353,6 +258,3 @@ class OrderDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-
-

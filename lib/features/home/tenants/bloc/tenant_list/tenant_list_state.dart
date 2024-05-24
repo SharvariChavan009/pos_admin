@@ -6,8 +6,8 @@ final class TenantListInitialState extends TenantListState{}
 
 final class TenantListLoadingState extends TenantListState{}
 final class TenantListSuccessState extends TenantListState{
-  List<Tenant>? tenant;
-  TenantListSuccessState({required this.tenant});
+  List<Tenant>? tenants;
+  TenantListSuccessState({required this.tenants});
 }
 
 final class TenantListFailureState extends TenantListState{}

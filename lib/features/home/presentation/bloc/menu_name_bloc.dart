@@ -6,7 +6,7 @@ class MenuNameBloc extends Bloc<MenuNameEvent, MenuNameState> {
   MenuNameBloc() : super(MenuNameInitial()) {
     on<MenuNameSelected>((event, emit) async {
       String menuName = event.menuName;
-      emit(MenuNameFetchedSuccess(menuName)); // Prints after 1 second.
+      emit(MenuNameFetchedSuccess(menuName,event.selectedUser)); // Prints after 1 second.
     });
   }
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/colors.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
+import 'package:pos_admin/features/home/users/bloc/new_user/new_user_bloc.dart';
+import 'package:pos_admin/features/home/users/bloc/new_user/new_user_event.dart';
 
 TextEditingController nameController = TextEditingController();
 
@@ -220,9 +223,11 @@ class NewUser extends StatelessWidget {
                               CustomButton(
                               backgroundColor: AppColors.baseColor,
                               text: "Create",
-                              onPressed: () {},
+                              onPressed: () {
+                                BlocProvider.of<NewUserBloc>(context).add(NewUserCreatePressedEvent());
+                              },
                             ),
-                              SizedBox(
+                              const SizedBox(
                               height: 10,
                             ),
                               CustomButton(
@@ -230,7 +235,7 @@ class NewUser extends StatelessWidget {
                               text: "Create & create another",
                               onPressed: () {},
                             ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomButton(

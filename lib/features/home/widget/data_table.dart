@@ -1,12 +1,18 @@
-import 'package:flutter/material.dart';
 
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/images/images_constant.dart';
 import '../../../core/common/widgets/label.dart';
+import '../presentation/bloc/menu_name_bloc.dart';
+import '../presentation/bloc/menu_name_event.dart';
+
+
 class PageTable extends StatefulWidget {
   List<dynamic> users;
   String menuName;
-  PageTable({required this.menuName,required this.users,super.key});
+  PageTable({required this.menuName, required this.users, super.key});
 
   @override
   State<PageTable> createState() => _PageTableState();
@@ -25,16 +31,15 @@ class _PageTableState extends State<PageTable> {
       showEmptyRows: false,
       showCheckboxColumn: false,
       showFirstLastButtons: true,
-      headingRowColor: MaterialStateColor.resolveWith(
-              (states) => AppColors.primaryColor),
+      headingRowColor:
+          MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
       arrowHeadColor: AppColors.secondaryColor,
-      columnSpacing: 60,
+      columnSpacing: 35,
       rowsPerPage: _rowsPerPage!,
       onRowsPerPageChanged: (value) {
         setState(
-              () {
-            _rowsPerPage =
-                value ?? PaginatedDataTable.defaultRowsPerPage;
+          () {
+            _rowsPerPage = value ?? PaginatedDataTable.defaultRowsPerPage;
           },
         );
       },
@@ -44,8 +49,7 @@ class _PageTableState extends State<PageTable> {
         DataColumn(
           label: Checkbox(
             activeColor: AppColors.secondaryColor,
-            side: BorderSide(
-                color: AppColors.whiteColor.withOpacity(.8)),
+            side: BorderSide(color: AppColors.whiteColor.withOpacity(.8)),
             checkColor: AppColors.whiteColor,
             tristate: true,
             value: _selectAll,
@@ -61,11 +65,13 @@ class _PageTableState extends State<PageTable> {
           ),
         ),
         const DataColumn(
-          label: Text('Profile Photo',
+          label: Text(
+            'Profile Photo',
             style: TextStyle(
                 color: AppColors.iconColor,
                 fontFamily: CustomLabels.primaryFont),
-          ),),
+          ),
+        ),
         DataColumn(
           label: const Text(
             'Name',
@@ -78,11 +84,9 @@ class _PageTableState extends State<PageTable> {
               _sortColumnIndex = columnIndex;
               _sortAscending = ascending;
               if (ascending) {
-                widget.users.sort((a, b) =>
-                    a.name!.compareTo(b.name!));
+                widget.users.sort((a, b) => a.name!.compareTo(b.name!));
               } else {
-                widget.users.sort((a, b) =>
-                    b.name!.compareTo(a.name!));
+                widget.users.sort((a, b) => b.name!.compareTo(a.name!));
               }
             });
           },
@@ -99,13 +103,9 @@ class _PageTableState extends State<PageTable> {
               _sortColumnIndex = columnIndex;
               _sortAscending = ascending;
               if (ascending) {
-                widget.users.sort(
-                        (a, b) =>
-                        a.email!.compareTo(b.email!));
+                widget.users.sort((a, b) => a.email!.compareTo(b.email!));
               } else {
-                widget.users.sort(
-                        (a, b) =>
-                        b.email!.compareTo(a.email!));
+                widget.users.sort((a, b) => b.email!.compareTo(a.email!));
               }
             });
           },
@@ -122,13 +122,9 @@ class _PageTableState extends State<PageTable> {
               _sortColumnIndex = columnIndex;
               _sortAscending = ascending;
               if (ascending) {
-                widget.users.sort(
-                        (a, b) =>
-                        a.phone!.compareTo(b.phone!));
+                widget.users.sort((a, b) => a.phone!.compareTo(b.phone!));
               } else {
-                widget.users.sort(
-                        (a, b) =>
-                        b.phone!.compareTo(a.phone!));
+                widget.users.sort((a, b) => b.phone!.compareTo(a.phone!));
               }
             });
           },
@@ -198,7 +194,18 @@ class _PageTableState extends State<PageTable> {
         ),
         DataColumn(
           label: const Text(
-            'Action',
+            '',
+            style: TextStyle(
+                color: AppColors.iconColor,
+                fontFamily: CustomLabels.primaryFont),
+          ),
+          onSort: (columnIndex, ascending) {
+            // No need to sort the Action column
+          },
+        ),
+        DataColumn(
+          label: const Text(
+            '',
             style: TextStyle(
                 color: AppColors.iconColor,
                 fontFamily: CustomLabels.primaryFont),
@@ -208,17 +215,15 @@ class _PageTableState extends State<PageTable> {
           },
         ),
       ],
-      source: OrderDataSource(widget.users),
+      source: OrderDataSource(widget.users,context),
     );
   }
 }
 
-
-
 class OrderDataSource extends DataTableSource {
   final List<dynamic> orders;
-
-  OrderDataSource(this.orders);
+  BuildContext context;
+  OrderDataSource(this.orders,this.context);
 
   @override
   DataRow? getRow(int index) {
@@ -284,12 +289,15 @@ class OrderDataSource extends DataTableSource {
                 fontFamily: CustomLabels.primaryFont,
                 color: AppColors.whiteColor),
           )),
-          DataCell(Text(
-            order.active.toString(),
-            style: const TextStyle(
-                fontFamily: CustomLabels.primaryFont,
-                color: AppColors.whiteColor),
-          )),
+          DataCell(order.active
+              ? const Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                )
+              : const Icon(
+                  Icons.cancel_outlined,
+                  color: Colors.red,
+                )),
           const DataCell(
             Text(
               // order['orderStatus'].toString(),
@@ -298,14 +306,41 @@ class OrderDataSource extends DataTableSource {
                   fontFamily: CustomLabels.primaryFont, color: Colors.yellow),
             ),
           ),
-          const DataCell(InkWell(
-            child: Text(
-              'View Order',
+           DataCell(InkWell(
+            onTap: (){
+              print("view clicked");
+              BlocProvider.of<MenuNameBloc>(context).add(MenuNameSelected(context: context, menuName: "View",selectedUser:order));
+            },
+              child: const Row(children: [
+            Icon(
+              Icons.remove_red_eye_outlined,
+              color: AppColors.iconColor,
+            ),
+            SizedBox(width: 4),
+            Text(
+              'View',
               style: TextStyle(
                   fontFamily: CustomLabels.primaryFont,
                   color: AppColors.secondaryColor),
             ),
-          )),
+          ]))),
+           DataCell(InkWell(
+            onTap: (){
+              BlocProvider.of<MenuNameBloc>(context).add(MenuNameSelected(context: context, menuName: "Edit",selectedUser:order));
+            },
+              child: const Row(children: [
+                Icon(
+                  Icons.edit_note,
+                   color: AppColors.iconColor,
+                ),
+                SizedBox(width: 4),
+                 Text(
+              'Edit',
+              style: TextStyle(
+                  fontFamily: CustomLabels.primaryFont,
+                  color: AppColors.secondaryColor),
+            ),
+          ]))),
         ]);
   }
 
@@ -318,4 +353,3 @@ class OrderDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-

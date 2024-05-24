@@ -3,19 +3,21 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_event.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_state.dart';
 import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_event.dart';
 import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_state.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../../../../core/common/api_constants.dart';
-import '../../data/tenant_data.dart';
+import '../../../tenants/data/tenant_data.dart';
+import '../../data/role_data.dart';
 
 
-
-class TenantListBloc extends Bloc<TenantListEvent, TenantListState> {
+class RoleListBloc extends Bloc<RoleListEvent, RoleListState> {
   final Dio _dio = Dio();
-  var url= ApiConstants.apiTenantList;
+  var url= ApiConstants.apiRoleList;
   String? _accessToken;
-  TenantListBloc() : super(TenantListInitialState()) {
+  RoleListBloc() : super(RoleListInitialState()) {
     _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
@@ -24,7 +26,7 @@ class TenantListBloc extends Bloc<TenantListEvent, TenantListState> {
       error: true,
       compact: true,
     ));
-    on<TenantListFetch>((event, emit) async {
+    on<RoleListFetch>((event, emit) async {
       var box = await Hive.openBox('userData');
       _accessToken = box.get("accessToken");
       try {
@@ -38,15 +40,13 @@ class TenantListBloc extends Bloc<TenantListEvent, TenantListState> {
             )
         );
         if (response.statusCode == 200) {
-          final dynamic responseData = response.data;
-          List<Tenant> tenantlist = tenantsFromJson(json.encode(response.data));
-          print(tenantlist.length);
-          emit(TenantListSuccessState(tenants: tenantlist));
+          List<Role> roles = rolesFromJson(json.encode(response.data));
+          emit(RoleListSuccessState(role: roles));
         } else {
-          emit(TenantListFailureState());
+          emit(RoleListFailureState());
         }
       } catch (error) {
-        emit(TenantListFailureState());
+        emit(RoleListFailureState());
       }
     });
   }
