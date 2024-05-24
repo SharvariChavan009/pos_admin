@@ -3,19 +3,21 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_event.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_state.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_event.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_state.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_event.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_state.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
 import '../../../../../core/common/api_constants.dart';
-import '../../data/user_data.dart';
+import '../../../tenants/data/tenant_data.dart';
+import '../../data/role_data.dart';
 
 
-class UserListBloc extends Bloc<UserListEvent, UserListState> {
+class RoleListBloc extends Bloc<RoleListEvent, RoleListState> {
   final Dio _dio = Dio();
-  var url= ApiConstants.apiUserList;
+  var url= ApiConstants.apiRoleList;
   String? _accessToken;
-  UserListBloc() : super(UserListInitialState()) {
+  RoleListBloc() : super(RoleListInitialState()) {
     _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
@@ -24,7 +26,7 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
       error: true,
       compact: true,
     ));
-    on<UserListFetch>((event, emit) async {
+    on<RoleListFetch>((event, emit) async {
       var box = await Hive.openBox('userData');
       _accessToken = box.get("accessToken");
       try {
@@ -38,14 +40,13 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
             )
         );
         if (response.statusCode == 200) {
-          final dynamic responseData = response.data;
-           List<User> users = usersFromJson(json.encode(response.data));
-          emit(UserListSuccessState(users: users));
+          List<Role> roles = rolesFromJson(json.encode(response.data));
+          emit(RoleListSuccessState(role: roles));
         } else {
-          emit(UserListFailureState());
+          emit(RoleListFailureState());
         }
       } catch (error) {
-        emit(UserListFailureState());
+        emit(RoleListFailureState());
       }
     });
   }

@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
+import 'package:pos_admin/features/home/presentation/home_page.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
+import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_event.dart';
+import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_bloc.dart';
 import '../../../../core/common/colors.dart';
 import '../../presentation/bloc/menu_name_bloc.dart';
 import '../../presentation/bloc/menu_name_event.dart';
+import '../../tenants/bloc/tenant_list/tenant_list_event.dart';
 import '../../users/bloc/user_list/user_list_bloc.dart';
 import '../../users/bloc/user_list/user_list_event.dart';
 
@@ -36,6 +41,7 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Dashboard"));
+          HomePage.currentMenu = "Dashboard";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -48,6 +54,7 @@ class SidebarPageState extends State<SidebarPage> {
               .add(MenuNameSelected(context: context, menuName: "User"));
           BlocProvider.of<UserListBloc>(context)
               .add(UserListFetch());
+          HomePage.currentMenu = "User";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -58,6 +65,9 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Tenants"));
+          BlocProvider.of<TenantListBloc>(context)
+              .add(TenantListFetch());
+          HomePage.currentMenu = "Tenants";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -68,6 +78,9 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context).add(
               MenuNameSelected(context: context, menuName: "Roles"));
+          BlocProvider.of<RoleListBloc>(context)
+              .add(RoleListFetch());
+          HomePage.currentMenu = "Roles";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -78,6 +91,7 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context).add(
               MenuNameSelected(context: context, menuName: "Permissions"));
+          HomePage.currentMenu = "Permissions";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -88,6 +102,7 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Logout"));
+          HomePage.currentMenu = "Logout";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
@@ -114,7 +129,7 @@ class SidebarPageState extends State<SidebarPage> {
               isCollapsed: MediaQuery.of(context).size.width <= 1000,
               items: _items,
               onHoverPointer: MaterialStateMouseCursor.clickable,
-              // avatarImg: _avatarImg,
+              avatarImg: _avatarImg,
               showTitle: false,
               duration: const Duration(milliseconds: 200),
               onTitleTap: () {

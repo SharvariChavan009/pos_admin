@@ -4,7 +4,9 @@ import '../../../core/common/colors.dart';
 import '../home_component/drawer/drawer.dart';
 import 'home_screen_components.dart';
 
+
 class HomePage extends StatefulWidget {
+  static String? currentMenu = "";
   const HomePage({super.key});
 
   @override

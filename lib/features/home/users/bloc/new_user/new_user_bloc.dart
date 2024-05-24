@@ -1,21 +1,17 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_event.dart';
-import 'package:pos_admin/features/home/users/bloc/user_list/user_list_state.dart';
+import 'package:pos_admin/features/home/users/bloc/new_user/new_user_event.dart';
+import 'package:pos_admin/features/home/users/bloc/new_user/new_user_state.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../../../core/common/api_constants.dart';
-import '../../data/user_data.dart';
 
 
-class UserListBloc extends Bloc<UserListEvent, UserListState> {
+class NewUserBloc extends Bloc<NewUserCreateEvent, NewUserCreateState> {
   final Dio _dio = Dio();
-  var url= ApiConstants.apiUserList;
+  var url= ApiConstants.apiCreateNewUser;
   String? _accessToken;
-  UserListBloc() : super(UserListInitialState()) {
+  NewUserBloc() : super(NewUserCreateInitialState()) {
     _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
@@ -24,9 +20,7 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
       error: true,
       compact: true,
     ));
-    on<UserListFetch>((event, emit) async {
-      var box = await Hive.openBox('userData');
-      _accessToken = box.get("accessToken");
+    on<NewUserCreatePressedEvent>((event, emit) async {
       try {
         final response = await _dio.get(
             url,
@@ -39,13 +33,13 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
         );
         if (response.statusCode == 200) {
           final dynamic responseData = response.data;
-           List<User> users = usersFromJson(json.encode(response.data));
-          emit(UserListSuccessState(users: users));
+          // List<User> users = usersFromJson(json.encode(response.data));
+          emit(NewUserCreateSuccessState());
         } else {
-          emit(UserListFailureState());
+          emit(NewUserCreateFailureState());
         }
       } catch (error) {
-        emit(UserListFailureState());
+        emit(NewUserCreateFailureState());
       }
     });
   }
