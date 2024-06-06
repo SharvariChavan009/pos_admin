@@ -75,8 +75,8 @@ class CustomTextField extends StatelessWidget {
     });
 
     return SizedBox(
-      height: (screenSize.height * 0.050).clamp(minHeight, double.infinity),
-      width: screenSize.width * 0.277,
+      height:height?? (screenSize.height * 0.050).clamp(minHeight, double.infinity),
+      width:width?? screenSize.width * 0.377,
       child: CupertinoTextField(
         textInputAction: textInputAction,
         controller: controller,
@@ -129,8 +129,8 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.black.withOpacity(.2),
           borderRadius: BorderRadius.circular(10)),
-      height: (screenSize.height * 0.050).clamp(minHeight, double.infinity),
-      width: (screenSize.width * 0.22).clamp(minWidth, double.infinity),
+      height:height?? (screenSize.height * 0.050).clamp(minHeight, double.infinity),
+      width:width?? (screenSize.width * 0.22).clamp(minWidth, double.infinity),
       child: TextFormField(
         textInputAction: textInputAction,
         style: TextStyle(

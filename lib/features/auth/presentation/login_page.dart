@@ -6,6 +6,7 @@ import 'package:pos_admin/core/routes/router.dart';
 import 'package:pos_admin/features/auth/domain/repository/login_repository.dart';
 import 'package:pos_admin/features/auth/presentation/bloc/email_validation/email_validation_bloc.dart';
 import 'package:pos_admin/features/auth/presentation/bloc/login_state.dart';
+import '../../../core/common/images/images_constant.dart';
 import '../../../core/common/widgets/c_text_field.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/custom_snackbar.dart';
@@ -39,15 +40,33 @@ class LoginPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-          body: Center(
+        body: Stack(
+          children: [
+            // Full-screen background image
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppImages.backgroundImage),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            // Centered Card widget
+            Center(
               child: SizedBox(
-        width: 400,
-        height: 430,
-        child: Card(
-          color: AppColors.darkColor,
-            margin: EdgeInsets.all(16),
-            child: LoginColumn(context),
-      ))),
+
+                width: 400,
+                height: 430,
+                child: Card(
+                  elevation: 5,
+                  color: AppColors.darkColor.withOpacity(0.8), // Adjust opacity as needed
+                  margin: EdgeInsets.all(16),
+                  child: LoginColumn(context),
+                ),
+              ),
+            ),
+          ],
+        ),
       ));
   }
 }
