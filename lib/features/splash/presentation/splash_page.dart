@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos_admin/core/routes/router.dart';
 import '../../../core/common/images/images_constant.dart';
+import '../../../core/utils/device_dimension.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,9 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Image.asset(
-        AppImages.backgroundImage,
-        fit: BoxFit.cover,
+        height: DeviceUtils.getDeviceDimension(context).height,
+        width: DeviceUtils.getDeviceDimension(context).width,
+        AppImages.splashImage,
+        fit: BoxFit.fill,
       ),
     );
   }

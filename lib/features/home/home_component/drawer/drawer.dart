@@ -128,7 +128,7 @@ class SidebarPageState extends State<SidebarPage> {
               curve: Curves.fastOutSlowIn,
               isCollapsed: MediaQuery.of(context).size.width <= 1000,
               items: _items,
-              onHoverPointer: MaterialStateMouseCursor.clickable,
+              onHoverPointer: WidgetStateMouseCursor.clickable,
               avatarImg: _avatarImg,
               showTitle: false,
               duration: const Duration(milliseconds: 200),

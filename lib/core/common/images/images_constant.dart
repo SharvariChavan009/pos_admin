@@ -1,7 +1,9 @@
 class AppImages{
-  static String backgroundImage = "assets/image/app_background.jpg";
-}
+  static const splashImage ="assets/image/dribble_51_cleanup.webp";
+  static const backgroundImage="assets/image/6c0ca4623be0046d5e8c3e3a292f8567.webp";
 
+// "assets/image/app_background.jpg";
+}
 class AllIcons {
   static const home = "assets/icons/hm.svg";
   static const menu = "assets/icons/menu.svg";

@@ -63,7 +63,7 @@ class CustomLabels {
     Color color = AppColors.whiteColor,
     String fontFamily = primaryFont,
     double letterSpacing = 0,
-    // double height = 1.2,
+    double height = 2.2,
   }) {
     return GoogleFonts.getFont(
       fontFamily,
