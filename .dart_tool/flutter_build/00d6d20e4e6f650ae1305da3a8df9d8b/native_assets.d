@@ -1,0 +1,1 @@
+ /Users/koptotech/Documents/flutter\ web/pos_admin/.dart_tool/flutter_build/00d6d20e4e6f650ae1305da3a8df9d8b/native_assets.yaml: 

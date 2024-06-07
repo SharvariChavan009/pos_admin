@@ -47,6 +47,7 @@ dependencies:
     git:
       url: https://github.com/kothalenehal/flutter_collapsible_sidebar.git
       ref: master
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
