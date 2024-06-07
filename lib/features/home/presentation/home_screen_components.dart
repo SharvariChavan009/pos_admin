@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
+import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
-import '../roles/presentation/role_list.dart';
+import '../roles/presentation/new_role_creation.dart';
 import '../tenants/presentation/tenant_list.dart';
 import '../users/presentation/new_user_creation.dart';
 import '../users/presentation/user_list.dart';
@@ -27,11 +29,11 @@ Widget buildContentColumn(context, TabController tabController) {
           child: BlocBuilder<MenuNameBloc, MenuNameState>(
             builder: (context, state) {
               String menuName = "";
-              if (state is MenuNameFetchedSuccess){
+              if (state is MenuNameFetchedSuccess) {
                 print("menu name =${state.name}");
                 menuName = state.name;
               }
-              if(state is MenuNameInitial){
+              if (state is MenuNameInitial) {
                 print("menu name =");
                 // menuName = state.name;
               }
@@ -40,7 +42,9 @@ Widget buildContentColumn(context, TabController tabController) {
                   const SizedBox(
                     height: 20,
                   ),
-                  menuName == "Dashboard" || menuName == "" ? dashboardHeaderPart(context) : headerPart(context),
+                  menuName == "Dashboard" || menuName == ""
+                      ? dashboardHeaderPart(context)
+                      : headerPart(context),
                   middleBody(tabController),
                 ],
               );
@@ -51,7 +55,6 @@ Widget buildContentColumn(context, TabController tabController) {
     ),
   );
 }
-
 
 Widget headerPart(context) {
   return Expanded(
@@ -107,7 +110,7 @@ Widget headerPart(context) {
                     InkWell(
                       child: (mainMenuName == "User" ||
                               mainMenuName == "Tenants" ||
-                              mainMenuName == "Roles"||
+                              mainMenuName == "Roles" ||
                               mainMenuName == "Permissions")
                           ? const Icon(
                               Icons.arrow_forward_ios_sharp,
@@ -309,6 +312,7 @@ Widget middleBody(TabController tabController) {
                   ),
                   const Expanded(
                     child: TenantListSetting(),
+                    //! child: NewTenantCreation(),
                   )
                 ],
               );
@@ -318,6 +322,7 @@ Widget middleBody(TabController tabController) {
                   Expanded(
                     flex: 11,
                     child: RoleListSetting(),
+                    //! child: NewRoleCreation(),
                   )
                 ],
               );
