@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:pos_admin/core/common/colors.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/core/common/widgets/label.dart';
@@ -203,12 +202,15 @@ class NewUser extends StatelessWidget {
                     onChanged: (value) {
                       _switchValue = value;
                     }),
-                const Text("Active",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    )),
+                const Padding(
+                  padding: EdgeInsets.only(left: 5.0),
+                  child: Text("Active",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      )),
+                ),
               ]),
               const SizedBox(
                 height: 10,
@@ -256,181 +258,179 @@ class NewUser extends StatelessWidget {
                                         color: Colors.white, fontSize: 16),
                                   ),
                                 ),
-                                Container(
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: 3,
-                                      itemBuilder: (context, index) {
-                                        for (int i = 0; i < 3; i++) {
-                                          selectedItemValue
-                                              .add("Select an option");
-                                        }
-                                        return Row(
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 20.0,
-                                                    left: 20,
-                                                    bottom: 8,
-                                                    top: 8),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.darkColor,
-                                                    border: Border.all(
-                                                      color: Colors.white,
-                                                      width: 0.3,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 3,
+                                    itemBuilder: (context, index) {
+                                      for (int i = 0; i < 3; i++) {
+                                        selectedItemValue
+                                            .add("Select an option");
+                                      }
+                                      return Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20.0,
+                                                  left: 20,
+                                                  bottom: 8,
+                                                  top: 8),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.darkColor,
+                                                  border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 0.3,
                                                   ),
-                                                  child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        const Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12),
+                                                ),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      const Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .only(
+                                                                    right:
+                                                                        10.0),
+                                                            child: Icon(
+                                                              Icons.delete,
+                                                              color: AppColors
+                                                                  .errorColor,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const Divider(
+                                                        color: Colors.white,
+                                                        thickness: 0.3,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            Padding(
+                                                            const Padding(
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       right:
-                                                                          10.0),
-                                                              child: Icon(
-                                                                Icons.delete,
-                                                                color: AppColors
-                                                                    .errorColor,
+                                                                          20.0,
+                                                                      left:
+                                                                          20,
+                                                                      bottom:
+                                                                          5),
+                                                              child: Text(
+                                                                "Tenant unit",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        14),
                                                               ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                        const Divider(
-                                                          color: Colors.white,
-                                                          thickness: 0.3,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              const Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            20.0,
-                                                                        left:
-                                                                            20,
-                                                                        bottom:
-                                                                            5),
-                                                                child: Text(
-                                                                  "Tenant unit",
-                                                                  style: TextStyle(
-                                                                      color: Colors
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      right:
+                                                                          20.0,
+                                                                      left:
+                                                                          20),
+                                                              child:
+                                                                  Container(
+                                                                height: (screenSize
+                                                                            .height *
+                                                                        0.050)
+                                                                    .clamp(
+                                                                        minHeight,
+                                                                        double
+                                                                            .infinity),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        color: AppColors
+                                                                            .darkColor,
+                                                                        border: Border
+                                                                            .all(
+                                                                          color:
+                                                                              Colors.white,
+                                                                          width:
+                                                                              0.2,
+                                                                        ),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10)),
+                                                                child:
+                                                                    DropdownButtonFormField(
+                                                                  padding: const EdgeInsets
+                                                                      .only(
+                                                                      left:
+                                                                          10),
+                                                                  iconEnabledColor:
+                                                                      Colors
                                                                           .white,
-                                                                      fontSize:
-                                                                          14),
+                                                                  iconDisabledColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                  decoration:
+                                                                      const InputDecoration(
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                  ),
+                                                                  dropdownColor:
+                                                                      AppColors
+                                                                          .primaryColor,
+                                                                  value: selectedItemValue[
+                                                                      index],
+                                                                  items:
+                                                                      _dropDownItem(),
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    var selected;
+                                
+                                                                    selected =
+                                                                        selectedItemValue[index] =
+                                                                            value!;
+                                
+                                                                    print(
+                                                                        "selected value is: $selected");
+                                                                  },
                                                                 ),
                                                               ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                            20.0,
-                                                                        left:
-                                                                            20),
-                                                                child:
-                                                                    Container(
-                                                                  height: (screenSize
-                                                                              .height *
-                                                                          0.050)
-                                                                      .clamp(
-                                                                          minHeight,
-                                                                          double
-                                                                              .infinity),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                          color: AppColors
-                                                                              .darkColor,
-                                                                          border: Border
-                                                                              .all(
-                                                                            color:
-                                                                                Colors.white,
-                                                                            width:
-                                                                                0.2,
-                                                                          ),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10)),
-                                                                  child:
-                                                                      DropdownButtonFormField(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            10),
-                                                                    iconEnabledColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    iconDisabledColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    style: const TextStyle(
-                                                                        color: Colors
-                                                                            .white),
-                                                                    decoration:
-                                                                        const InputDecoration(
-                                                                      enabledBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                    ),
-                                                                    dropdownColor:
-                                                                        AppColors
-                                                                            .primaryColor,
-                                                                    value: selectedItemValue[
-                                                                        index],
-                                                                    items:
-                                                                        _dropDownItem(),
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      var selected;
-
-                                                                      selected =
-                                                                          selectedItemValue[index] =
-                                                                              value!;
-
-                                                                      print(
-                                                                          "selected value is: $selected");
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
+                                                            )
+                                                          ],
                                                         ),
-                                                        const SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                      ]),
-                                                ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
-                                          ],
-                                        );
-                                      }),
-                                ),
+                                          ),
+                                        ],
+                                      );
+                                    }),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 9.0, bottom: 18),

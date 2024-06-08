@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
+import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
+import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
+import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
@@ -299,7 +302,7 @@ Widget middleBody(TabController tabController) {
                 children: [
                   Expanded(
                     flex: 11,
-                    child: Text("Tables list"),
+                    child: DashboardScreen(),
                   )
                 ],
               );
@@ -331,7 +334,8 @@ Widget middleBody(TabController tabController) {
                 children: [
                   Expanded(
                     flex: 11,
-                    child: Text("Tables list"),
+                    child: PermisionListSetting(),
+                    //! child: NewPermissionCreation(),
                   )
                 ],
               );

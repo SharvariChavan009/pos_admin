@@ -4,14 +4,14 @@ import 'package:pos_admin/core/common/colors.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
 
-class NewRoleCreation extends StatefulWidget {
-  const NewRoleCreation({super.key});
+class NewPermissionCreation extends StatefulWidget {
+  const NewPermissionCreation({super.key});
 
   @override
-  State<NewRoleCreation> createState() => _NewRoleCreationState();
+  State<NewPermissionCreation> createState() => _NewPermissionCreationState();
 }
 
-class _NewRoleCreationState extends State<NewRoleCreation> {
+class _NewPermissionCreationState extends State<NewPermissionCreation> {
   @override
   Widget build(BuildContext context) {
     //! ------------------------------------
@@ -22,11 +22,12 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
 
     print("ScreenSize: $screensize");
     //! ------------------------------------
+
     return Dialog(
       backgroundColor: AppColors.lightGreyColor,
       child: SizedBox(
         width: screensize.width * 0.6, // 80% of screen width
-        height: screensize.height * 0.45, // 50% of screen height
+        height: screensize.height * 0.33, // 50% of screen height
 
         child: Container(
           decoration: BoxDecoration(
@@ -47,7 +48,7 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Create role",
+                        "Create permission",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -93,28 +94,19 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: nameController,
-                    width: screensize.width,
+                  SizedBox(
+                    width: screenWidth*0.34,
+                    child: CustomTextField(
+                      controller: nameController,
+                      width: screensize.width,
+                    ),
                   ),
                   const SizedBox(height: 10),
-
-                  const Text(
-                    "Permissions",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  const SizedBox(height: 10),
-
-                  CustomTextField(
-                    hintText: "Start typing to search",
-                    controller: nameController,
-                    width: screensize.width,
-                  ),
 
                   //! Section Three
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 20),
                     child: Row(children: [
                       Container(
                         width: screensize.width * 0.06,
