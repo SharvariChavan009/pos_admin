@@ -32,6 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   top: 20, bottom: 20, left: 40, right: 10),
               child: Container(
                 decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: Colors.white,
@@ -84,7 +85,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       child: AutoSizeText(
                                         'Super Admin',
                                         maxLines: 1,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            color: AppColors.iconColor),
                                       ),
                                     ),
                                   ],
@@ -111,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: [
                                   Icon(
                                     Icons.exit_to_app,
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: AppColors.iconColor,
                                     size: 25,
                                   ),
                                   const SizedBox(
@@ -148,6 +150,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   top: 20, bottom: 20, left: 10, right: 40),
               child: Container(
                 decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: Colors.white,
@@ -196,7 +199,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     child: AutoSizeText(
                                       'v3.2.83',
                                       maxLines: 1,
-                                      style: TextStyle(color: Colors.white),
+                                      style:
+                                          TextStyle(color: AppColors.iconColor),
                                     ),
                                   ),
                                 ],
@@ -214,7 +218,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: [
                                   Icon(
                                     Icons.auto_stories,
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: AppColors.iconColor,
                                     size: 20,
                                   ),
                                   const SizedBox(
@@ -242,7 +246,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: [
                                   Image.asset(
                                     "assets/icons/github.512x489.png",
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: AppColors.iconColor,
                                     height: 20,
                                     width: 20,
                                   ),
