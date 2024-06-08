@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
 
 import '../../../core/common/colors.dart';
 import '../home_component/drawer/drawer.dart';
 import 'home_screen_components.dart';
-
 
 class HomePage extends StatefulWidget {
   static String? currentMenu = "";
@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+ 
     tabController = TabController(length: 12, vsync: this);
   }
 
@@ -36,4 +37,3 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
-
