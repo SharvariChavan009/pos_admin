@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:pos_admin/core/common/colors.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/core/common/widgets/label.dart';
-import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
-import 'package:pos_admin/features/home/users/bloc/new_user/new_user_bloc.dart';
-import 'package:pos_admin/features/home/users/bloc/new_user/new_user_event.dart';
 
 TextEditingController nameController = TextEditingController();
 
@@ -17,7 +14,7 @@ class NewUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // !------------------------------------
-    bool _switchValue = false;
+    bool _switchValue = true;
     String dropdownValue = 'Select an option';
 
     final screenSize = MediaQuery.of(context).size;
@@ -30,9 +27,9 @@ class NewUser extends StatelessWidget {
 
       return itemValue
           .map((value) => DropdownMenuItem(
-        value: value,
-        child: Text(value),
-      ))
+                value: value,
+                child: Text(value),
+              ))
           .toList();
     }
     // !------------------------------------
@@ -56,9 +53,9 @@ class NewUser extends StatelessWidget {
                         "Profile Photo",
                         style: TextStyle(color: Colors.white),
                       ),
-                      SizedBox(height: 1),
+                      SizedBox(height: 10),
                       CircleAvatar(
-                        radius: 30,
+                        radius: 45,
                         backgroundImage: NetworkImage(
                             'https://example.com/profile_photo.jpg'), // Replace with your image URL or use AssetImage for local images
                       ),
@@ -69,7 +66,7 @@ class NewUser extends StatelessWidget {
               Container(
                 color: AppColors.darkColor,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
+                  padding: const EdgeInsets.only(bottom: 20.0, top: 10),
                   child: Row(
                     children: [
                       Padding(
@@ -80,29 +77,29 @@ class NewUser extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Name",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               CustomTextField(
                                   hintText: "Name", controller: nameController),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 "Phone Number",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               CustomTextField(
                                 hintText: "Phone Number",
                                 controller: nameController,
                               ),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 "Confirm Password",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               CustomTextField(
                                 hintText: "Confirm Password",
                                 controller: nameController,
@@ -118,30 +115,30 @@ class NewUser extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Email",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               CustomTextField(
                                   hintText: "Email",
                                   controller: nameController),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 "Password",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               CustomTextField(
                                 hintText: "Password",
                                 controller: nameController,
                               ),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 "Roles",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              SizedBox(height: 1),
+                              const SizedBox(height: 1),
                               Container(
                                 height: (screenSize.height * 0.050)
                                     .clamp(minHeight, double.infinity),
@@ -150,19 +147,19 @@ class NewUser extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                       color:
-                                      AppColors.iconColor.withOpacity(.2),
+                                          AppColors.iconColor.withOpacity(.2),
                                       width: .5,
                                     ),
                                     color: Colors.black.withOpacity(.2),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: DropdownButtonFormField<String>(
-                                  padding: EdgeInsets.only(left: 10),
+                                  padding: const EdgeInsets.only(left: 10),
                                   iconEnabledColor: Colors.white,
                                   iconDisabledColor: Colors.white,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: AppColors.iconColor,
                                   ),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: InputBorder.none,
                                   ),
                                   dropdownColor: AppColors.primaryColor,
@@ -173,19 +170,19 @@ class NewUser extends StatelessWidget {
                                     'Manager',
                                     'Owner'
                                   ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(
-                                                fontFamily:
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                            fontFamily:
                                                 CustomLabels.primaryFont,
-                                                color: AppColors.iconColor,
-                                                fontSize: 13),
-                                          ),
-                                        );
-                                      }).toList(),
+                                            color: AppColors.iconColor,
+                                            fontSize: 13),
+                                      ),
+                                    );
+                                  }).toList(),
                                   onChanged: (String? newValue) {
                                     dropdownValue = newValue!;
                                   },
@@ -201,7 +198,7 @@ class NewUser extends StatelessWidget {
               ),
               Row(children: [
                 Switch(
-                    activeColor: Colors.purple,
+                    activeColor: AppColors.baseColor,
                     value: _switchValue,
                     onChanged: (value) {
                       _switchValue = value;
@@ -235,9 +232,9 @@ class NewUser extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: const Text(" Units",
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Text(" Units",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -251,8 +248,8 @@ class NewUser extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20.0),
                                   child: Text(
                                     "User tenant units",
                                     style: TextStyle(
@@ -282,34 +279,33 @@ class NewUser extends StatelessWidget {
                                                     color: AppColors.darkColor,
                                                     border: Border.all(
                                                       color: Colors.white,
-                                                      width: 0.5,
+                                                      width: 0.3,
                                                     ),
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        12),
+                                                        BorderRadius.circular(
+                                                            12),
                                                   ),
                                                   child: Column(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         const SizedBox(
                                                           height: 10,
                                                         ),
-                                                        Row(
+                                                        const Row(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .end,
+                                                              MainAxisAlignment
+                                                                  .end,
                                                           children: [
                                                             Padding(
-                                                              padding:
-                                                              const EdgeInsets
+                                                              padding: EdgeInsets
                                                                   .only(
-                                                                  right:
-                                                                  10.0),
+                                                                      right:
+                                                                          10.0),
                                                               child: Icon(
                                                                 Icons.delete,
                                                                 color: AppColors
@@ -320,101 +316,100 @@ class NewUser extends StatelessWidget {
                                                         ),
                                                         const Divider(
                                                           color: Colors.white,
-                                                          thickness: 0.5,
+                                                          thickness: 0.3,
                                                         ),
                                                         Padding(
                                                           padding:
-                                                          const EdgeInsets
-                                                              .all(5.0),
+                                                              const EdgeInsets
+                                                                  .all(5.0),
                                                           child: Column(
                                                             crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              Padding(
-                                                                padding:
-                                                                const EdgeInsets
+                                                              const Padding(
+                                                                padding: EdgeInsets
                                                                     .only(
-                                                                    right:
-                                                                    20.0,
-                                                                    left:
-                                                                    20,
-                                                                    bottom:
-                                                                    5),
+                                                                        right:
+                                                                            20.0,
+                                                                        left:
+                                                                            20,
+                                                                        bottom:
+                                                                            5),
                                                                 child: Text(
                                                                   "Tenant unit",
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
-                                                                      14),
+                                                                          14),
                                                                 ),
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right:
-                                                                    20.0,
-                                                                    left:
-                                                                    20),
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        right:
+                                                                            20.0,
+                                                                        left:
+                                                                            20),
                                                                 child:
-                                                                Container(
+                                                                    Container(
                                                                   height: (screenSize
-                                                                      .height *
-                                                                      0.050)
+                                                                              .height *
+                                                                          0.050)
                                                                       .clamp(
-                                                                      minHeight,
-                                                                      double
-                                                                          .infinity),
+                                                                          minHeight,
+                                                                          double
+                                                                              .infinity),
                                                                   decoration:
-                                                                  BoxDecoration(
-                                                                      color: AppColors
-                                                                          .darkColor,
-                                                                      border: Border
-                                                                          .all(
-                                                                        color:
-                                                                        Colors.white,
-                                                                        width:
-                                                                        0.5,
-                                                                      ),
-                                                                      borderRadius:
-                                                                      BorderRadius.circular(10)),
+                                                                      BoxDecoration(
+                                                                          color: AppColors
+                                                                              .darkColor,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.white,
+                                                                            width:
+                                                                                0.2,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
                                                                   child:
-                                                                  DropdownButtonFormField(
-                                                                    padding: EdgeInsets
+                                                                      DropdownButtonFormField(
+                                                                    padding: const EdgeInsets
                                                                         .only(
                                                                         left:
-                                                                        10),
+                                                                            10),
                                                                     iconEnabledColor:
-                                                                    Colors
-                                                                        .white,
+                                                                        Colors
+                                                                            .white,
                                                                     iconDisabledColor:
-                                                                    Colors
-                                                                        .white,
-                                                                    style: TextStyle(
+                                                                        Colors
+                                                                            .white,
+                                                                    style: const TextStyle(
                                                                         color: Colors
                                                                             .white),
                                                                     decoration:
-                                                                    InputDecoration(
+                                                                        const InputDecoration(
                                                                       enabledBorder:
-                                                                      InputBorder
-                                                                          .none,
+                                                                          InputBorder
+                                                                              .none,
                                                                     ),
                                                                     dropdownColor:
-                                                                    AppColors
-                                                                        .primaryColor,
+                                                                        AppColors
+                                                                            .primaryColor,
                                                                     value: selectedItemValue[
-                                                                    index],
+                                                                        index],
                                                                     items:
-                                                                    _dropDownItem(),
+                                                                        _dropDownItem(),
                                                                     onChanged:
                                                                         (value) {
                                                                       var selected;
 
                                                                       selected =
-                                                                      selectedItemValue[index] =
-                                                                      value!;
+                                                                          selectedItemValue[index] =
+                                                                              value!;
 
                                                                       print(
                                                                           "selected value is: $selected");
@@ -444,15 +439,15 @@ class NewUser extends StatelessWidget {
                                       width: 200,
                                       decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: Colors.white,
+                                            color: AppColors.baseColor,
                                             width: 0.5,
                                           ),
-                                          color: AppColors.darkColor,
+                                          color: AppColors.baseColor,
                                           borderRadius:
-                                          BorderRadius.circular(8)),
-                                      child: Center(
+                                              BorderRadius.circular(8)),
+                                      child: const Center(
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: EdgeInsets.all(8.0),
                                           child: Text(
                                             "Add to user tenant units",
                                             style: TextStyle(
@@ -491,14 +486,14 @@ class NewUser extends StatelessWidget {
                     width: 90,
                     decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.white,
+                          color: AppColors.baseColor,
                           width: 0.5,
                         ),
-                        color: AppColors.darkColor,
+                        color: AppColors.baseColor,
                         borderRadius: BorderRadius.circular(8)),
-                    child: Center(
+                    child: const Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Create",
                           style: TextStyle(
@@ -519,9 +514,9 @@ class NewUser extends StatelessWidget {
                           ),
                           color: AppColors.darkColor,
                           borderRadius: BorderRadius.circular(8)),
-                      child: Center(
+                      child: const Center(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Create & create another",
                             style: TextStyle(
@@ -542,9 +537,9 @@ class NewUser extends StatelessWidget {
                         ),
                         color: AppColors.darkColor,
                         borderRadius: BorderRadius.circular(8)),
-                    child: Center(
+                    child: const Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Cancel",
                           style: TextStyle(
@@ -562,4 +557,3 @@ class NewUser extends StatelessWidget {
     );
   }
 }
-
