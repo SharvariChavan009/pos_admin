@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_admin/core/common/widgets/c_searchbar.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
 import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
-import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
 import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
-import '../roles/presentation/new_role_creation.dart';
 import '../tenants/presentation/tenant_list.dart';
 import '../users/presentation/new_user_creation.dart';
 import '../users/presentation/user_list.dart';
@@ -271,8 +270,21 @@ Widget middleBody(TabController tabController) {
               return Column(
                 children: [
                   Container(
-                    height: 40,
-                    color: Colors.cyan,
+                    height: 50,
+                    color: AppColors.darkColor,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 20.0, left: 10),
+                          child: SizedBox(
+                            height: 40,
+                            width: 250,
+                            child: CommonSearchBar(),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   const Expanded(
                     child: UserListSetting(),
@@ -310,8 +322,21 @@ Widget middleBody(TabController tabController) {
               return Column(
                 children: [
                   Container(
-                    height: 40,
-                    color: Colors.cyan,
+                    height: 50,
+                    color: AppColors.darkColor,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 20.0, left: 10),
+                          child: SizedBox(
+                            height: 40,
+                            width: 250,
+                            child: CommonSearchBar(),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   const Expanded(
                     child: TenantListSetting(),
@@ -330,9 +355,26 @@ Widget middleBody(TabController tabController) {
                 ],
               );
             case "Permissions":
-              return const Column(
+              return Column(
                 children: [
-                  Expanded(
+                  Container(
+                    height: 50,
+                    color: AppColors.darkColor,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 20.0, left: 10),
+                          child: SizedBox(
+                            height: 40,
+                            width: 250,
+                            child: CommonSearchBar(),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Expanded(
                     flex: 11,
                     child: PermisionListSetting(),
                     //! child: NewPermissionCreation(),

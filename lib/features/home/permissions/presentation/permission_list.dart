@@ -151,35 +151,11 @@ class _PageTableState extends State<PageTable> {
           },
         ),
         DataColumn(
-          // ! Search bar here..
-
-          label: SizedBox(
-            height: 35,
-            width: 250,
-            child: TextFormField(
-              style: const TextStyle(color: AppColors.iconColor, fontSize: 14),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: AppColors.iconColor,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Colors.black.withOpacity(.2),
-                hintText: "Search",
-                hintStyle:
-                    const TextStyle(fontSize: 14, color: AppColors.iconColor),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.white, width: 0.2),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.white, width: 0.2),
-                ),
-              ),
-              keyboardType: TextInputType.text,
-            ),
+          label: const Text(
+            '',
+            style: TextStyle(
+                color: AppColors.iconColor,
+                fontFamily: CustomLabels.primaryFont),
           ),
           onSort: (columnIndex, ascending) {
             // No need to sort the Action column
