@@ -6,8 +6,10 @@ import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
 import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
+import 'package:pos_admin/features/home/roles/presentation/new_role_creation.dart';
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
 import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
+import 'package:pos_admin/features/home/tenants/presentation/new_tenant_creation.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
@@ -78,9 +80,9 @@ Widget headerPart(context) {
                 String Name = "";
                 String? mainMenuName = "";
                 if (state is MenuNameFetchedSuccess) {
-                  print(state.name);
                   mainMenuName = state.name;
-                  if (state.name == "User" || state.name == "Tenants") {
+                  print("mainMenuName=${mainMenuName}");
+                  if (state.name == "User" || state.name == "Tenants" || state.name == "Roles" || state.name == "Permissions") {
                     Name = "List";
                   } else {
                     Name = state.name;
@@ -205,15 +207,33 @@ Widget headerPart(context) {
                             textStyle: CustomLabels.bodyTextStyle(
                                 fontSize: 14, color: AppColors.whiteColor),
                             onPressed: () {
-                              if (Name == "View") {
-                                BlocProvider.of<MenuNameBloc>(context).add(
-                                    MenuNameSelected(
-                                        context: context, menuName: 'Edit'));
-                              } else {
-                                BlocProvider.of<MenuNameBloc>(context).add(
-                                    MenuNameSelected(
-                                        context: context,
-                                        menuName: 'Create User'));
+                              print("button text  = ${Name} , text =${buttonText(Name)}");
+                              switch (Name){
+                                case "View":
+                                  BlocProvider.of<MenuNameBloc>(context).add(
+                                      MenuNameSelected(
+                                          context: context, menuName: 'Edit'));
+                                      break;
+                                case "Tenants":
+                                  if(buttonText(Name) == "New Tenants"){
+                                    BlocProvider.of<MenuNameBloc>(context).add(
+                                        MenuNameSelected(
+                                            context: context,
+                                            menuName: 'Create Tenant'));
+                                  }
+                                  break;
+                                case "Roles":
+                                  if(buttonText(Name) == "New Roles"){
+                                    BlocProvider.of<MenuNameBloc>(context).add(
+                                        MenuNameSelected(
+                                            context: context,
+                                            menuName: 'Create Role'));
+                                  }
+                                default:
+                                  BlocProvider.of<MenuNameBloc>(context).add(
+                                      MenuNameSelected(
+                                          context: context,
+                                          menuName: 'Create User'));
                               }
                             },
                           ));
@@ -242,6 +262,10 @@ String buttonText(String menuName) {
       return "";
     case "Edit":
       return "Delete";
+    case "Create Tenant":
+      return "";
+    case "Create Role":
+      return "";
     default:
       return "New $menuName";
   }
@@ -309,6 +333,15 @@ Widget middleBody(TabController tabController) {
                   )
                 ],
               );
+            case "Create Tenant":
+              return const Column(
+                children: [
+                  Expanded(
+                    flex: 11,
+                    child: NewTenantCreation(),
+                  )
+                ],
+              );
             case "Dashboard":
               return const Column(
                 children: [
@@ -344,7 +377,7 @@ Widget middleBody(TabController tabController) {
                   )
                 ],
               );
-            case "Roles":
+            case "Roles" || "Create Role":
               return const Column(
                 children: [
                   Expanded(
@@ -378,15 +411,6 @@ Widget middleBody(TabController tabController) {
                     flex: 11,
                     child: PermisionListSetting(),
                     //! child: NewPermissionCreation(),
-                  )
-                ],
-              );
-            case "Logout":
-              return const Column(
-                children: [
-                  Expanded(
-                    flex: 11,
-                    child: Text("Tables list"),
                   )
                 ],
               );

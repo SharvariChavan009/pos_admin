@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/routes/router.dart';
 import 'package:pos_admin/features/auth/presentation/bloc/email_validation/email_validation_bloc.dart';
 import 'package:pos_admin/features/auth/presentation/login_page.dart';
+import 'package:pos_admin/features/home/logout/bloc/logout_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
 import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_bloc.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => TenantListBloc()),
         BlocProvider(create: (context) => RoleListBloc()),
         BlocProvider(create: (context) => NewUserBloc()),
+        BlocProvider(create: (context) => LogoutBloc()),
 
         BlocProvider<EmailTextFieldValidationBloc>(
           create: (context) =>

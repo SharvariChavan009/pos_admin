@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/colors.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
+
+import '../../presentation/bloc/menu_name_bloc.dart';
+import '../../presentation/bloc/menu_name_event.dart';
 
 class NewRoleCreation extends StatefulWidget {
   const NewRoleCreation({super.key});
@@ -56,6 +60,9 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
+                          BlocProvider.of<MenuNameBloc>(context).add(
+                              MenuNameSelected(
+                                  context: context, menuName: 'Roles'));
                         },
                         child: Icon(
                           Icons.close,
