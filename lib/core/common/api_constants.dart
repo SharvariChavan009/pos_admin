@@ -5,4 +5,5 @@ class ApiConstants {
   static const apiCreateNewUser = "$apiBaseUrl/add_user";
   static const apiTenantList = "$apiBaseUrl/tenants";
   static const apiRoleList = "$apiBaseUrl/roles";
+  static const apiLogout = "$apiBaseUrl/logout";
 }

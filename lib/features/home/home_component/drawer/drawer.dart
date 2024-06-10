@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
+import 'package:pos_admin/features/home/logout/bloc/logout_bloc.dart';
+import 'package:pos_admin/features/home/logout/bloc/logout_event.dart';
 import 'package:pos_admin/features/home/presentation/home_page.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_event.dart';
@@ -92,17 +94,6 @@ class SidebarPageState extends State<SidebarPage> {
           BlocProvider.of<MenuNameBloc>(context).add(
               MenuNameSelected(context: context, menuName: "Permissions"));
           HomePage.currentMenu = "Permissions";
-        },
-        onHold: () => ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Face"))),
-      ),
-      CollapsibleItem(
-        text: 'Logout',
-        iconImage: AllIcons.setting,
-        onPressed: () {
-          BlocProvider.of<MenuNameBloc>(context)
-              .add(MenuNameSelected(context: context, menuName: "Logout"));
-          HomePage.currentMenu = "Logout";
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),

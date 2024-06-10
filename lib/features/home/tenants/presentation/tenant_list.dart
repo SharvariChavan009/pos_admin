@@ -308,7 +308,7 @@ class OrderDataSource extends DataTableSource {
               onTap: () {
                 print("view clicked");
                 BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "View"));
+                    MenuNameSelected(context: context, menuName: "View Tenants"));
               },
               child: const Row(children: [
                 Icon(
@@ -326,7 +326,7 @@ class OrderDataSource extends DataTableSource {
           DataCell(InkWell(
               onTap: () {
                 BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "Edit"));
+                    MenuNameSelected(context: context, menuName: "Edit Tenants"));
               },
               child: const Row(children: [
                 Icon(
