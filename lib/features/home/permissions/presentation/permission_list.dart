@@ -61,7 +61,6 @@ class PermisionListSettingState extends State<PermisionListSetting> {
                   },
                 );
               }
-
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
