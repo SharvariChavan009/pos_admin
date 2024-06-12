@@ -428,7 +428,7 @@ Widget middleBody(TabController tabController) {
                 children: [
                   Expanded(
                     flex: 11,
-                    child: Text("Tables list"),
+                    child: DashboardScreen(),
                   )
                 ],
               );
