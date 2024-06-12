@@ -57,7 +57,7 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                               padding: const EdgeInsets.only(top: 37.0),
                               child: Container(
                                 color: AppColors.darkColor,
-                                child: const Expanded(
+                                child: Expanded(
                                     child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -66,11 +66,27 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     SizedBox(height: 10),
-                                    CircleAvatar(
-                                      radius: 50,
-                                      backgroundImage: NetworkImage(
-                                          'https://example.com/profile_photo.jpg'), // Replace with your image URL or use AssetImage for local images
+
+                                    // Todo: Image picker code logic
+                                    Container(
+                                      width: 90,
+                                      height: 90,
+                                      child: InkWell(
+                                        onTap: () {
+                                          print("Image picker clicked!");
+                                        },
+                                        child: Icon(
+                                          Icons.camera_alt,
+                                          size: 30,
+                                          color: AppColors.iconColor,
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.black.withOpacity(.2),
+                                      ),
                                     ),
+                                    // Todo: ................................
                                   ],
                                 )),
                               ),
@@ -92,13 +108,8 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                                     children: [
                                       CustomTextField(
                                         controller: nameController,
-                                        width: screensize.width * 0.402,
+                                        width: screensize.width * 0.3
                                       ),
-                                      // Container(
-                                      //   color: Colors.red,
-                                      //   child:
-                                      //   Icon(Icons.web),
-                                      // )
                                     ],
                                   )
                                 ],

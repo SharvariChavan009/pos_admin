@@ -11,6 +11,8 @@ import 'package:pos_admin/features/home/roles/presentation/new_role_creation.dar
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
 import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
 import 'package:pos_admin/features/home/tenants/presentation/new_tenant_creation.dart';
+import 'package:pos_admin/features/home/users/presentation/edit_user_screen.dart';
+import 'package:pos_admin/features/home/users/presentation/view_user_screen.dart';
 import '../../../core/common/colors.dart';
 import '../../../core/common/widgets/label.dart';
 import '../../../core/utils/device_dimension.dart';
@@ -83,7 +85,10 @@ Widget headerPart(context) {
                 if (state is MenuNameFetchedSuccess) {
                   mainMenuName = state.name;
                   print("mainMenuName=${mainMenuName}");
-                  if (state.name == "User" || state.name == "Tenants" || state.name == "Roles" || state.name == "Permissions") {
+                  if (state.name == "User" ||
+                      state.name == "Tenants" ||
+                      state.name == "Roles" ||
+                      state.name == "Permissions") {
                     Name = "List";
                   } else {
                     Name = state.name;
@@ -208,15 +213,16 @@ Widget headerPart(context) {
                             textStyle: CustomLabels.bodyTextStyle(
                                 fontSize: 14, color: AppColors.whiteColor),
                             onPressed: () {
-                              print("button text  = ${Name} , text =${buttonText(Name)}");
-                              switch (Name){
+                              print(
+                                  "button text  = ${Name} , text =${buttonText(Name)}");
+                              switch (Name) {
                                 case "View":
                                   BlocProvider.of<MenuNameBloc>(context).add(
                                       MenuNameSelected(
                                           context: context, menuName: 'Edit'));
-                                      break;
+                                  break;
                                 case "Tenants":
-                                  if(buttonText(Name) == "New Tenants"){
+                                  if (buttonText(Name) == "New Tenants") {
                                     BlocProvider.of<MenuNameBloc>(context).add(
                                         MenuNameSelected(
                                             context: context,
@@ -224,7 +230,7 @@ Widget headerPart(context) {
                                   }
                                   break;
                                 case "Roles":
-                                  if(buttonText(Name) == "New Roles"){
+                                  if (buttonText(Name) == "New Roles") {
                                     BlocProvider.of<MenuNameBloc>(context).add(
                                         MenuNameSelected(
                                             context: context,
@@ -324,6 +330,9 @@ Widget middleBody(TabController tabController) {
                   ),
                   const Expanded(
                     child: UserListSetting(),
+
+                    // child: ViewUserScreen(),
+                    // child: EditUserScreen(),
                   )
                 ],
               );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,12 +9,18 @@ import 'package:pos_admin/core/common/widgets/label.dart';
 
 TextEditingController nameController = TextEditingController();
 
-class NewUser extends StatelessWidget {
+class NewUser extends StatefulWidget {
   const NewUser({super.key});
 
   @override
+  State<NewUser> createState() => _NewUserState();
+}
+
+class _NewUserState extends State<NewUser> {
+  @override
   Widget build(BuildContext context) {
     // !------------------------------------
+
     bool _switchValue = true;
     String dropdownValue = 'Select an option';
 
@@ -31,8 +39,8 @@ class NewUser extends StatelessWidget {
               ))
           .toList();
     }
-    // !------------------------------------
 
+    // !------------------------------------
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Center(
@@ -45,7 +53,7 @@ class NewUser extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: AppColors.darkColor,
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -53,11 +61,27 @@ class NewUser extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(height: 10),
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundImage: NetworkImage(
-                            'https://example.com/profile_photo.jpg'), // Replace with your image URL or use AssetImage for local images
+
+                      // Todo: Image picker code logic
+                      Container(
+                        width: 90,
+                        height: 90,
+                        child: InkWell(
+                          onTap: () {
+                            print("Image picker clicked!");
+                          },
+                          child: Icon(
+                            Icons.camera_alt,
+                            size: 30,
+                            color: AppColors.iconColor,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withOpacity(.2),
+                        ),
                       ),
+                      // Todo: ................................
                     ],
                   ),
                 ),
@@ -283,13 +307,11 @@ class NewUser extends StatelessWidget {
                                                     width: 0.3,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          12),
+                                                      BorderRadius.circular(12),
                                                 ),
                                                 child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                        MainAxisAlignment.start,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
@@ -303,8 +325,8 @@ class NewUser extends StatelessWidget {
                                                                 .end,
                                                         children: [
                                                           Padding(
-                                                            padding: EdgeInsets
-                                                                .only(
+                                                            padding:
+                                                                EdgeInsets.only(
                                                                     right:
                                                                         10.0),
                                                             child: Icon(
@@ -333,8 +355,7 @@ class NewUser extends StatelessWidget {
                                                                   .only(
                                                                       right:
                                                                           20.0,
-                                                                      left:
-                                                                          20,
+                                                                      left: 20,
                                                                       bottom:
                                                                           5),
                                                               child: Text(
@@ -352,10 +373,8 @@ class NewUser extends StatelessWidget {
                                                                       .only(
                                                                       right:
                                                                           20.0,
-                                                                      left:
-                                                                          20),
-                                                              child:
-                                                                  Container(
+                                                                      left: 20),
+                                                              child: Container(
                                                                 height: (screenSize
                                                                             .height *
                                                                         0.050)
@@ -378,10 +397,11 @@ class NewUser extends StatelessWidget {
                                                                             BorderRadius.circular(10)),
                                                                 child:
                                                                     DropdownButtonFormField(
-                                                                  padding: const EdgeInsets
-                                                                      .only(
-                                                                      left:
-                                                                          10),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              10),
                                                                   iconEnabledColor:
                                                                       Colors
                                                                           .white,
@@ -400,18 +420,19 @@ class NewUser extends StatelessWidget {
                                                                   dropdownColor:
                                                                       AppColors
                                                                           .primaryColor,
-                                                                  value: selectedItemValue[
-                                                                      index],
+                                                                  value:
+                                                                      selectedItemValue[
+                                                                          index],
                                                                   items:
                                                                       _dropDownItem(),
                                                                   onChanged:
                                                                       (value) {
                                                                     var selected;
-                                
+
                                                                     selected =
                                                                         selectedItemValue[index] =
                                                                             value!;
-                                
+
                                                                     print(
                                                                         "selected value is: $selected");
                                                                   },
