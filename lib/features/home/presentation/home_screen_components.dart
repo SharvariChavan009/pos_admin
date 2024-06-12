@@ -341,7 +341,7 @@ Widget middleBody(TabController tabController) {
                 children: [
                   Expanded(
                     flex: 11,
-                    child: NewUser(),
+                    child: ViewUserScreen(),
                   )
                 ],
               );
