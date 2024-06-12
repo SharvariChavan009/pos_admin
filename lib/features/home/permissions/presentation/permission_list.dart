@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_event.dart';
+import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_state.dart';
 import 'package:pos_admin/features/home/roles/data/role_data.dart';
@@ -31,7 +33,7 @@ class PermisionListSettingState extends State<PermisionListSetting> {
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
           dataRowColor: MaterialStateColor.resolveWith(
-              (states) => AppColors.primaryColor),
+                  (states) => AppColors.primaryColor),
         ),
       ),
       child: BlocBuilder<RoleListBloc, RoleListState>(
@@ -44,20 +46,38 @@ class PermisionListSettingState extends State<PermisionListSetting> {
             print("Role = ${state.role!.length}");
             roles = state.role!;
           }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 10,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: PageTable(
-                    users: roles,
-                    menuName: 'Role',
+          return BlocListener<MenuNameBloc, MenuNameState>(
+            listener: (context, state) {
+              String menuName = "";
+              if (state is MenuNameFetchedSuccess) {
+                menuName = state.name;
+                print("selcteduse rrole   = ${menuName}");
+              }
+              if (menuName == "Create Permission") {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return NewPermissionCreation();
+                  },
+                );
+              }
+
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: PageTable(
+                      users: roles,
+                      menuName: 'Role',
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
@@ -68,6 +88,7 @@ class PermisionListSettingState extends State<PermisionListSetting> {
 class PageTable extends StatefulWidget {
   List<Role> users;
   String menuName;
+
   PageTable({required this.menuName, required this.users, super.key});
 
   @override
@@ -80,6 +101,7 @@ class _PageTableState extends State<PageTable> {
   bool _sortAscending = true;
   bool _selectAll = false;
   Image imageUrl = Image.asset('assets/image/pizza.webp');
+
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
@@ -88,13 +110,13 @@ class _PageTableState extends State<PageTable> {
       showCheckboxColumn: false,
       showFirstLastButtons: true,
       headingRowColor:
-          MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
+      MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
       arrowHeadColor: AppColors.secondaryColor,
       columnSpacing: 100,
       rowsPerPage: _rowsPerPage!,
       onRowsPerPageChanged: (value) {
         setState(
-          () {
+              () {
             _rowsPerPage = value ?? PaginatedDataTable.defaultRowsPerPage;
           },
         );
@@ -170,6 +192,7 @@ class _PageTableState extends State<PageTable> {
 class OrderDataSource extends DataTableSource {
   final List<Role> orders;
   BuildContext context;
+
   OrderDataSource(this.orders, this.context);
 
   @override

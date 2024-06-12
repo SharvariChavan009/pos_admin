@@ -58,45 +58,9 @@ class RoleListSettingState extends State<RoleListSetting> {
                 print("selcteduse rrole   = ${menuName}");
               }
               if (menuName == "Create Role") {
-                // OverlayManager.showSnackbar(
-                //   context,
-                //   type: ContentType.success,
-                //   title: "title",
-                //   message: "message",
-                // );
-
-                // Display newRole controller as an alert
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    // return AlertDialog(
-                    //   title: Text("Create New Role"),
-                    //   content: Column(
-                    //     mainAxisSize: MainAxisSize.min,
-                    //     children: <Widget>[
-                    //       TextField(
-                    //         decoration: InputDecoration(
-                    //           labelText: "Role Name",
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   actions: <Widget>[
-                    //     TextButton(
-                    //       child: Text("Cancel"),
-                    //       onPressed: () {
-                    //         Navigator.of(context).pop();
-                    //       },
-                    //     ),
-                    //     TextButton(
-                    //       child: Text("Create"),
-                    //       onPressed: () {
-                    //         // Handle the role creation logic here
-                    //         Navigator.of(context).pop();
-                    //       },
-                    //     ),
-                    //   ],
-                    // );
                     return NewRoleCreation();
                   },
                 );

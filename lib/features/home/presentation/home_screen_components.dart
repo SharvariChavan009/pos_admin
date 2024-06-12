@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/widgets/c_searchbar.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
 import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
+import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
 import 'package:pos_admin/features/home/roles/presentation/new_role_creation.dart';
@@ -229,6 +230,15 @@ Widget headerPart(context) {
                                             context: context,
                                             menuName: 'Create Role'));
                                   }
+                                case "Permissions":
+                                  if(buttonText(Name) == "New Permissions"){
+                                    BlocProvider.of<MenuNameBloc>(context).add(
+                                        MenuNameSelected(
+                                            context: context,
+                                            menuName: 'Create Permission'));
+                                  }
+                                  break;
+
                                 default:
                                   BlocProvider.of<MenuNameBloc>(context).add(
                                       MenuNameSelected(
@@ -265,6 +275,8 @@ String buttonText(String menuName) {
     case "Create Tenant":
       return "";
     case "Create Role":
+      return "";
+    case "Create Permission":
       return "";
     default:
       return "New $menuName";
@@ -387,7 +399,7 @@ Widget middleBody(TabController tabController) {
                   )
                 ],
               );
-            case "Permissions":
+            case "Permissions" || "Create Permission":
               return Column(
                 children: [
                   Container(
