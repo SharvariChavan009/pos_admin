@@ -307,7 +307,8 @@ Widget middleBody(TabController tabController) {
           String menuName = "";
           if (state is MenuNameFetchedSuccess) {
             menuName = state.name;
-            print("selcteduser = ${state.selectedUser?.name}");
+            print("menuname = ${menuName}");
+
           }
           switch (menuName) {
             case "User":
@@ -332,27 +333,24 @@ Widget middleBody(TabController tabController) {
                   ),
                   const Expanded(
                     child: UserListSetting(),
-
-                    // child: ViewUserScreen(),
-                    // child: EditUserScreen(),
                   )
                 ],
               );
             case "View":
-              return const Column(
+              return  Column(
                 children: [
                   Expanded(
                     flex: 11,
-                    child: ViewUserScreen(),
+                    child: (HomePage.currentMenu == "User") ? ViewUserScreen() : ViewTenantScreen(),
                   )
                 ],
               );
             case "Edit":
-              return const Column(
+              return  Column(
                 children: [
                   Expanded(
                     flex: 11,
-                    child: NewUser(),
+                    child: (HomePage.currentMenu == "User") ? EditUserScreen() : EditTenantScreen(),
                   )
                 ],
               );
