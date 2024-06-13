@@ -10,7 +10,9 @@ import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
 import 'package:pos_admin/features/home/roles/presentation/new_role_creation.dart';
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
 import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
+import 'package:pos_admin/features/home/tenants/presentation/edit_tenant_screen.dart';
 import 'package:pos_admin/features/home/tenants/presentation/new_tenant_creation.dart';
+import 'package:pos_admin/features/home/tenants/presentation/view_tenant_screen.dart';
 import 'package:pos_admin/features/home/users/presentation/edit_user_screen.dart';
 import 'package:pos_admin/features/home/users/presentation/view_user_screen.dart';
 import '../../../core/common/colors.dart';
@@ -394,7 +396,8 @@ Widget middleBody(TabController tabController) {
                   ),
                   const Expanded(
                     child: TenantListSetting(),
-                    //! child: NewTenantCreation(),
+                    // child: EditTenantScreen(),
+                    // child: ViewTenantScreen(),
                   )
                 ],
               );
