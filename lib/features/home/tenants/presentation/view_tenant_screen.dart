@@ -10,7 +10,6 @@ import 'package:pos_admin/features/home/tenants/presentation/dialog_screens/dele
 import 'package:pos_admin/features/home/tenants/presentation/dialog_screens/edit_dialog_screen.dart';
 import 'package:pos_admin/features/home/tenants/presentation/dialog_screens/new_tenant_unit_dialog_screen.dart';
 
-import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
 
 class ViewTenantScreen extends StatefulWidget {
   const ViewTenantScreen({super.key});

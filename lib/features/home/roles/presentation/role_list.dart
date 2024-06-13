@@ -231,25 +231,6 @@ class OrderDataSource extends DataTableSource {
           ),
           DataCell(InkWell(
               onTap: () {
-                print("view clicked");
-                BlocProvider.of<MenuNameBloc>(context)
-                    .add(MenuNameSelected(context: context, menuName: "View"));
-              },
-              child: const Row(children: [
-                Icon(
-                  Icons.remove_red_eye_outlined,
-                  color: AppColors.iconColor,
-                ),
-                SizedBox(width: 4),
-                Text(
-                  'View',
-                  style: TextStyle(
-                      fontFamily: CustomLabels.primaryFont,
-                      color: AppColors.secondaryColor),
-                ),
-              ]))),
-          DataCell(InkWell(
-              onTap: () {
                 BlocProvider.of<MenuNameBloc>(context)
                     .add(MenuNameSelected(context: context, menuName: "Edit"));
               },
@@ -261,6 +242,25 @@ class OrderDataSource extends DataTableSource {
                 SizedBox(width: 4),
                 Text(
                   'Edit',
+                  style: TextStyle(
+                      fontFamily: CustomLabels.primaryFont,
+                      color: AppColors.secondaryColor),
+                ),
+              ]))),
+          DataCell(InkWell(
+              onTap: () {
+                print("view clicked");
+                BlocProvider.of<MenuNameBloc>(context)
+                    .add(MenuNameSelected(context: context, menuName: "View"));
+              },
+              child: const Row(children: [
+                Icon(
+                  Icons.delete_forever,
+                  color: Colors.red,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  'Delete',
                   style: TextStyle(
                       fontFamily: CustomLabels.primaryFont,
                       color: AppColors.secondaryColor),
