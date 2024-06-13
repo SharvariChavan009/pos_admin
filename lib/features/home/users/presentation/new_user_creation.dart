@@ -569,7 +569,9 @@ class _NewUserState extends State<NewUser> {
                       ),
                     ),
                   ),
-                ]),
+                ]
+                )
+                ,
               ),
             ],
           ),
