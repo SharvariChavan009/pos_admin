@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_admin/core/common/widgets/c_searchbar.dart';
+import 'package:pos_admin/features/home/tenants/cubits/tenant_search/tenantsearch_cubit.dart';
 import '../../../../core/common/colors.dart';
 import '../../../../core/common/images/images_constant.dart';
 import '../../../../core/common/widgets/label.dart';
@@ -9,7 +11,6 @@ import '../../widget/data_table.dart';
 import '../bloc/tenant_list/tenant_list_bloc.dart';
 import '../bloc/tenant_list/tenant_list_state.dart';
 import '../data/tenant_data.dart';
-
 
 class TenantListSetting extends StatefulWidget {
   const TenantListSetting({super.key});
@@ -21,8 +22,9 @@ class TenantListSetting extends StatefulWidget {
 class TenantListSettingState extends State<TenantListSetting> {
   Image imageUrl = Image.asset('assets/image/pizza.webp');
 
-  List<Tenant> tenants = [
-  ];
+  List<Tenant> tenants = [];
+  List<Tenant> filteredData = [];
+  List<Tenant> displayData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,36 +32,52 @@ class TenantListSettingState extends State<TenantListSetting> {
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
           dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => AppColors.primaryColor),
+              (states) => AppColors.primaryColor),
         ),
       ),
-      child:
-      BlocBuilder<TenantListBloc, TenantListState>(
+      child: BlocBuilder<TenantsearchCubit, TenantsearchState>(
         builder: (context, state) {
-          print("tenent bloc");
-          if(state is TenantListSuccessState){
-            print("Success state");
-            tenants = state.tenants!;
+          if (state is TenantSearchSuccessState) {
+            filteredData = state.searchList;
           }
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 10,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: PageTableTenant(users: tenants, menuName: 'Tenants',),
-                ),
-              ),
-            ],
+          return BlocBuilder<TenantListBloc, TenantListState>(
+            builder: (context, state) {
+              print("tenent bloc");
+              if (state is TenantListSuccessState) {
+                print("Success state");
+
+                tenants = state.tenants!;
+
+                if (filteredData.isEmpty) {
+                  displayData = tenants;
+                } else {
+                  displayData = filteredData;
+                }
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: PageTableTenant(
+                        users: displayData,
+                        menuName: 'Tenants',
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
     );
   }
 }
-
 
 class PageTableTenant extends StatefulWidget {
   List<Tenant> users;
@@ -86,13 +104,13 @@ class PageTableTenantState extends State<PageTableTenant> {
       showCheckboxColumn: false,
       showFirstLastButtons: true,
       headingRowColor:
-      MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
+          MaterialStateColor.resolveWith((states) => AppColors.primaryColor),
       arrowHeadColor: AppColors.secondaryColor,
       columnSpacing: 35,
       rowsPerPage: _rowsPerPage!,
       onRowsPerPageChanged: (value) {
         setState(
-              () {
+          () {
             _rowsPerPage = value ?? PaginatedDataTable.defaultRowsPerPage;
           },
         );
@@ -297,18 +315,18 @@ class OrderDataSource extends DataTableSource {
           )),
           DataCell(order.active
               ? const Icon(
-            Icons.check_circle_outline,
-            color: Colors.green,
-          )
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                )
               : const Icon(
-            Icons.cancel_outlined,
-            color: Colors.red,
-          )),
+                  Icons.cancel_outlined,
+                  color: Colors.red,
+                )),
           DataCell(InkWell(
               onTap: () {
                 print("view clicked");
-                BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "View"));
+                BlocProvider.of<MenuNameBloc>(context)
+                    .add(MenuNameSelected(context: context, menuName: "View"));
               },
               child: const Row(children: [
                 Icon(
@@ -325,8 +343,8 @@ class OrderDataSource extends DataTableSource {
               ]))),
           DataCell(InkWell(
               onTap: () {
-                BlocProvider.of<MenuNameBloc>(context).add(
-                    MenuNameSelected(context: context, menuName: "Edit"));
+                BlocProvider.of<MenuNameBloc>(context)
+                    .add(MenuNameSelected(context: context, menuName: "Edit"));
               },
               child: const Row(children: [
                 Icon(
@@ -353,6 +371,3 @@ class OrderDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-
-

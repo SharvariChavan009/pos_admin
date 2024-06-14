@@ -3,6 +3,7 @@ import 'package:collapsible_sidebar/collapsible_sidebar/collapsible_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/images/images_constant.dart';
+import 'package:pos_admin/core/common/widgets/c_searchbar.dart';
 import 'package:pos_admin/features/home/home_component/drawer/setting.dart';
 import 'package:pos_admin/features/home/logout/bloc/logout_bloc.dart';
 import 'package:pos_admin/features/home/logout/bloc/logout_event.dart';
@@ -52,10 +53,12 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'User',
         iconImage: AllIcons.menu,
         onPressed: () {
+    
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "User"));
           BlocProvider.of<UserListBloc>(context)
               .add(UserListFetch());
+            
           HomePage.currentMenu = "User";
         },
         onHold: () => ScaffoldMessenger.of(context)
@@ -65,10 +68,12 @@ class SidebarPageState extends State<SidebarPage> {
         text: 'Tenants',
         iconImage: AllIcons.order,
         onPressed: () {
+         
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Tenants"));
           BlocProvider.of<TenantListBloc>(context)
               .add(TenantListFetch());
+         
           HomePage.currentMenu = "Tenants";
         },
         onHold: () => ScaffoldMessenger.of(context)

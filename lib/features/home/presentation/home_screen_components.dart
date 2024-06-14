@@ -7,6 +7,7 @@ import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.
 import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
+import 'package:pos_admin/features/home/roles/presentation/edit_role_screen.dart';
 import 'package:pos_admin/features/home/roles/presentation/new_role_creation.dart';
 import 'package:pos_admin/features/home/roles/presentation/role_list.dart';
 import 'package:pos_admin/features/home/permissions/presentation/permission_list.dart';
@@ -23,6 +24,12 @@ import '../users/presentation/new_user_creation.dart';
 import '../users/presentation/user_list.dart';
 import 'bloc/menu_name_event.dart';
 import 'home_page.dart';
+
+
+TextEditingController userController = TextEditingController();
+TextEditingController permissionController = TextEditingController();
+TextEditingController tenantController = TextEditingController();
+
 
 Widget buildContentColumn(context, TabController tabController) {
   return Expanded(
@@ -239,7 +246,7 @@ Widget headerPart(context) {
                                             menuName: 'Create Role'));
                                   }
                                 case "Permissions":
-                                  if(buttonText(Name) == "New Permissions"){
+                                  if (buttonText(Name) == "New Permissions") {
                                     BlocProvider.of<MenuNameBloc>(context).add(
                                         MenuNameSelected(
                                             context: context,
@@ -295,8 +302,8 @@ Widget middleBody(TabController tabController) {
   return Expanded(
     flex: 10,
     child: Container(
-      margin: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
+      margin:  EdgeInsets.all(10),
+      decoration:  BoxDecoration(
         // color: Colors.yellow,
         borderRadius: BorderRadius.all(
           Radius.circular(10),
@@ -308,7 +315,6 @@ Widget middleBody(TabController tabController) {
           if (state is MenuNameFetchedSuccess) {
             menuName = state.name;
             print("menuname = ${menuName}");
-
           }
           switch (menuName) {
             case "User":
@@ -317,7 +323,7 @@ Widget middleBody(TabController tabController) {
                   Container(
                     height: 50,
                     color: AppColors.darkColor,
-                    child: const Row(
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
@@ -337,20 +343,24 @@ Widget middleBody(TabController tabController) {
                 ],
               );
             case "View":
-              return  Column(
+              return Column(
                 children: [
                   Expanded(
                     flex: 11,
-                    child: (HomePage.currentMenu == "User") ? ViewUserScreen() : ViewTenantScreen(),
+                    child: (HomePage.currentMenu == "User")
+                        ? ViewUserScreen()
+                        : ViewTenantScreen(),
                   )
                 ],
               );
             case "Edit":
-              return  Column(
+              return Column(
                 children: [
                   Expanded(
                     flex: 11,
-                    child: (HomePage.currentMenu == "User") ? EditUserScreen() : EditTenantScreen(),
+                    child: (HomePage.currentMenu == "User")
+                        ? EditUserScreen()
+                        : EditTenantScreen(),
                   )
                 ],
               );
@@ -406,6 +416,7 @@ Widget middleBody(TabController tabController) {
                     flex: 11,
                     child: RoleListSetting(),
                     //! child: NewRoleCreation(),
+                    //! child: EditRoleScreen(),
                   )
                 ],
               );
