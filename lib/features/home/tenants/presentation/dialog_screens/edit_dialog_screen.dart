@@ -9,7 +9,8 @@ class NewEditTenantDialogScreen extends StatefulWidget {
   const NewEditTenantDialogScreen({super.key});
 
   @override
-  State<NewEditTenantDialogScreen> createState() => _NewEditTenantDialogScreen();
+  State<NewEditTenantDialogScreen> createState() =>
+      _NewEditTenantDialogScreen();
 }
 
 class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
@@ -59,405 +60,306 @@ class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
 
     // !------------------------------------
     return Dialog(
-      backgroundColor: AppColors.lightGreyColor,
-      child: SizedBox(
-        width: screensize.width * 0.7, // 80% of screen width
-        height: screensize.height * 0.99, // 50% of screen height
+        backgroundColor: AppColors.lightGreyColor,
+        child: SizedBox(
+          width: screensize.width * 0.7, // 80% of screen width
+          height: screensize.height * 0.99, // 50% of screen height
 
-        child: Container(
-          decoration: BoxDecoration(
-              color: AppColors.lightGreyColor,
-              borderRadius: BorderRadius.circular(15)),
-          // height: screenHeight * 0.50,
-          // width: screenWidth * 0.25,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                top: 20.0, bottom: 8, right: 10, left: 10),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20.0, left: 20, bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Create tenant unit",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.close,
-                            color: Colors.white.withOpacity(0.5),
+          child: Container(
+            decoration: BoxDecoration(
+                color: AppColors.lightGreyColor,
+                borderRadius: BorderRadius.circular(15)),
+            // height: screenHeight * 0.50,
+            // width: screenWidth * 0.25,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 20.0, bottom: 8, right: 10, left: 10),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20.0, left: 20, bottom: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Create tenant unit",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-
-                  // ! 1st row
-
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20.0, left: 20, bottom: 8, top: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGreyColor,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 0.3,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white.withOpacity(0.5),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: FittedBox(
-                                      fit: BoxFit.contain,
-                                      child: AutoSizeText(
-                                        'Details',
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    // ! 1st row
+
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20.0, left: 20, bottom: 8, top: 8),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGreyColor,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 0.3,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: AutoSizeText(
+                                          'Details',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const Divider(
-                              color: Colors.white,
-                              thickness: 0.3,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 3,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 4,
-                                            bottom: 4,
-                                            left: 20,
-                                            right: 20),
-                                        child: Container(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Image",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Container(
-                                                width: 80,
-                                                height: 80,
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "Image picker clicked!");
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.camera_alt,
-                                                    size: 30,
-                                                    color: AppColors.iconColor,
-                                                  ),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.black
-                                                      .withOpacity(.2),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                  Expanded(
-                                      flex: 6,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 4,
-                                            bottom: 4,
-                                            left: 20,
-                                            right: 20),
-                                        child: Container(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                child: const Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          "Name",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  2.0),
-                                                          child: Text(
-                                                            "*",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.red),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(height: 10),
-                                              CustomTextField(
-                                                controller: nameController,
-                                                width: screensize.width,
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Row(children: [
-                                                Switch(
-                                                    activeColor:
-                                                        AppColors.baseColor,
-                                                    value: _switchValue,
-                                                    onChanged: (value) {
-                                                      _switchValue = value;
-                                                    }),
-                                                const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 5.0),
-                                                  child: Text("Active",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      )),
-                                                ),
-                                                const SizedBox(
-                                                  width: 60,
-                                                ),
-                                                Switch(
-                                                    activeColor:
-                                                        AppColors.baseColor,
-                                                    value: _switchValue,
-                                                    onChanged: (value) {
-                                                      _switchValue = value;
-                                                    }),
-                                                const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 5.0),
-                                                  child: Text("Main Branch",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      )),
-                                                ),
-                                              ]),
-                                            ],
-                                          ),
-                                        ),
-                                      ))
-                                ],
+                              const Divider(
+                                color: Colors.white,
+                                thickness: 0.3,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ]),
-                    ),
-                  ),
-
-                  // ! 2nd row
-
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20.0, left: 20, bottom: 20, top: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGreyColor,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 0.3,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: FittedBox(
-                                      fit: BoxFit.contain,
-                                      child: AutoSizeText(
-                                        'Address',
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.white,
-                              thickness: 0.3,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, top: 4, bottom: 4),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        flex: 3,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 4,
+                                              bottom: 4,
+                                              left: 20,
+                                              right: 20),
                                           child: Container(
-                                        child: Column(
-                                          children: [
-                                            const Row(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  "Lane 1",
+                                                const Text(
+                                                  "Image",
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(2.0),
-                                                  child: Text(
-                                                    "*",
-                                                    style: TextStyle(
-                                                        color: Colors.red),
+                                                const SizedBox(height: 10),
+                                                Container(
+                                                  width: 80,
+                                                  height: 80,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      print(
+                                                          "Image picker clicked!");
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.camera_alt,
+                                                      size: 30,
+                                                      color:
+                                                          AppColors.iconColor,
+                                                    ),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.black
+                                                        .withOpacity(.2),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(height: 10),
-                                            CustomTextField(
-                                              controller: nameController,
-                                              width: screensize.width,
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                      Expanded(
-                                          child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Container(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Lane 2",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              const SizedBox(height: 10),
-                                              CustomTextField(
-                                                controller: nameController,
-                                                width: screensize.width,
-                                              ),
-                                            ],
                                           ),
-                                        ),
-                                      )),
-                                      Expanded(
+                                        )),
+                                    Expanded(
+                                        flex: 6,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 4,
+                                              bottom: 4,
+                                              left: 20,
+                                              right: 20),
                                           child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Lane 3",
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  child: const Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Name",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2.0),
+                                                            child: Text(
+                                                              "*",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .red),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 10),
+                                                CustomTextField(
+                                                  controller: nameController,
+                                                  width: screensize.width,
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Row(children: [
+                                                  Switch(
+                                                      activeColor:
+                                                          AppColors.baseColor,
+                                                      value: _switchValue,
+                                                      onChanged: (value) {
+                                                        _switchValue = value;
+                                                      }),
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5.0),
+                                                    child: Text("Active",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                        )),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 60,
+                                                  ),
+                                                  Switch(
+                                                      activeColor:
+                                                          AppColors.baseColor,
+                                                      value: _switchValue,
+                                                      onChanged: (value) {
+                                                        _switchValue = value;
+                                                      }),
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5.0),
+                                                    child: Text("Main Branch",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                        )),
+                                                  ),
+                                                ]),
+                                              ],
                                             ),
-                                            const SizedBox(height: 10),
-                                            CustomTextField(
-                                              controller: nameController,
-                                              width: screensize.width,
-                                            ),
-                                          ],
+                                          ),
+                                        ))
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ]),
+                      ),
+                    ),
+
+                    // ! 2nd row
+
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20.0, left: 20, bottom: 20, top: 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGreyColor,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 0.3,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: AutoSizeText(
+                                          'Address',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
                                         ),
-                                      ))
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Landmark",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            CustomTextField(
-                                              controller: nameController,
-                                              width: screensize.width,
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                      Expanded(
-                                          child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Container(
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                color: Colors.white,
+                                thickness: 0.3,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 4, bottom: 4),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Container(
                                           child: Column(
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
-                                                    "Postal Code",
+                                                    "Lane 1",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   ),
@@ -479,131 +381,153 @@ class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      )),
-                                      Expanded(
+                                        )),
+                                        Expanded(
+                                            child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
                                           child: Container(
-                                        child: Column(
-                                          children: [
-                                            const Row(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  "City",
+                                                const Text(
+                                                  "Lane 2",
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(2.0),
-                                                  child: Text(
-                                                    "*",
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
+                                                const SizedBox(height: 10),
+                                                CustomTextField(
+                                                  controller: nameController,
+                                                  width: screensize.width,
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(height: 10),
-                                            CustomTextField(
-                                              controller: nameController,
-                                              width: screensize.width,
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Country",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            Container(
-                                              height:
-                                                  (screenSize.height * 0.050)
-                                                      .clamp(minHeight,
-                                                          double.infinity),
-                                              width: (screenSize.width * 0.21)
-                                                  .clamp(minWidth,
-                                                      double.infinity),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: AppColors.iconColor
-                                                        .withOpacity(.2),
-                                                    width: .5,
-                                                  ),
-                                                  color: Colors.black
-                                                      .withOpacity(.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: DropdownButtonFormField<
-                                                  String>(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                iconEnabledColor: Colors.white,
-                                                iconDisabledColor: Colors.white,
-                                                style: const TextStyle(
-                                                  color: AppColors.iconColor,
-                                                ),
-                                                decoration:
-                                                    const InputDecoration(
-                                                  enabledBorder:
-                                                      InputBorder.none,
-                                                ),
-                                                dropdownColor:
-                                                    AppColors.primaryColor,
-                                                value: dropdownValue,
-                                                items: <String>[
-                                                  'Select an option',
-                                                  'Afghanistan',
-                                                  'Brazil',
-                                                  'India'
-                                                ].map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: const TextStyle(
-                                                          fontFamily:
-                                                              CustomLabels
-                                                                  .primaryFont,
-                                                          color: AppColors
-                                                              .iconColor,
-                                                          fontSize: 13),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (String? newValue) {
-                                                  dropdownValue = newValue!;
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                          child: Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: Container(
+                                          ),
+                                        )),
+                                        Expanded(
+                                            child: Container(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               const Text(
-                                                "State",
+                                                "Lane 3",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              CustomTextField(
+                                                controller: nameController,
+                                                width: screensize.width,
+                                              ),
+                                            ],
+                                          ),
+                                        ))
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                "Landmark",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              CustomTextField(
+                                                controller: nameController,
+                                                width: screensize.width,
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                        Expanded(
+                                            child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Container(
+                                            child: Column(
+                                              children: [
+                                                const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Postal Code",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.all(2.0),
+                                                      child: Text(
+                                                        "*",
+                                                        style: TextStyle(
+                                                            color: Colors.red),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                CustomTextField(
+                                                  controller: nameController,
+                                                  width: screensize.width,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                        Expanded(
+                                            child: Container(
+                                          child: Column(
+                                            children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "City",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(2.0),
+                                                    child: Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          color: Colors.red),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 10),
+                                              CustomTextField(
+                                                controller: nameController,
+                                                width: screensize.width,
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                "Country",
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -649,9 +573,9 @@ class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
                                                   value: dropdownValue,
                                                   items: <String>[
                                                     'Select an option',
-                                                    'Assam',
-                                                    'Karnataka',
-                                                    'Rajasthan'
+                                                    'Afghanistan',
+                                                    'Brazil',
+                                                    'India'
                                                   ].map<
                                                           DropdownMenuItem<
                                                               String>>(
@@ -680,319 +604,307 @@ class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
                                             ],
                                           ),
                                         ),
-                                      ))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ]),
-                    ),
-                  ),
-
-                  // ! 3rd row
-
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20.0, left: 20, bottom: 8, top: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGreyColor,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 0.3,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: FittedBox(
-                                      fit: BoxFit.contain,
-                                      child: AutoSizeText(
-                                        'Location',
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(
-                              color: Colors.white,
-                              thickness: 0.3,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 20.0,
-                                        left: 20,
-                                        bottom: 4,
-                                        top: 4),
-                                    child: Row(
-                                      children: [
                                         Expanded(
-                                            child: Container(
-                                          child: Column(
-                                            children: [
-                                              const Row(
-                                                children: [
-                                                  Text(
-                                                    "Lattitude",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: CustomTextField(
-                                                        controller:
-                                                            _controller1,
-                                                        width: screensize.width,
-                                                      ),
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: <Widget>[
-                                                        MaterialButton(
-                                                          minWidth: 5.0,
-                                                          child: const Icon(
-                                                            Icons.arrow_drop_up,
-                                                            color: Colors.white,
-                                                          ),
-                                                          onPressed: () {
-                                                            int currentValue =
-                                                                int.parse(
-                                                                    _controller1
-                                                                        .text);
-                                                            setState(() {
-                                                              currentValue++;
-                                                              _controller1
-                                                                      .text =
-                                                                  (currentValue)
-                                                                      .toString(); // incrementing value
-                                                            });
-                                                          },
-                                                        ),
-                                                        MaterialButton(
-                                                          minWidth: 5.0,
-                                                          child: const Icon(
-                                                            Icons
-                                                                .arrow_drop_down,
-                                                            color: Colors.white,
-                                                          ),
-                                                          onPressed: () {
-                                                            int currentValue =
-                                                                int.parse(
-                                                                    _controller1
-                                                                        .text);
-                                                            setState(() {
-                                                              print(
-                                                                  "Setting state");
-                                                              currentValue--;
-                                                              _controller1
-                                                                      .text =
-                                                                  (currentValue)
-                                                                      .toString(); // decrementing value
-                                                            });
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Spacer(
-                                                      flex: 1,
-                                                    )
-                                                  ],
+                                            child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8),
+                                          child: Container(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "State",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        )),
-                                        Expanded(
-                                            child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          child: Column(
-                                            children: [
-                                              const Row(
-                                                children: [
-                                                  Text(
-                                                    "Longitude",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Container(
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: CustomTextField(
-                                                        controller:
-                                                            _controller2,
-                                                        width: screensize.width,
-                                                      ),
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: <Widget>[
-                                                        MaterialButton(
-                                                          minWidth: 5.0,
-                                                          child: const Icon(
-                                                            Icons.arrow_drop_up,
-                                                            color: Colors.white,
-                                                          ),
-                                                          onPressed: () {
-                                                            int currentValue =
-                                                                int.parse(
-                                                                    _controller2
-                                                                        .text);
-                                                            setState(() {
-                                                              currentValue++;
-                                                              _controller2
-                                                                      .text =
-                                                                  (currentValue)
-                                                                      .toString(); // incrementing value
-                                                            });
-                                                          },
-                                                        ),
-                                                        MaterialButton(
-                                                          minWidth: 5.0,
-                                                          child: const Icon(
-                                                            Icons
-                                                                .arrow_drop_down,
-                                                            color: Colors.white,
-                                                          ),
-                                                          onPressed: () {
-                                                            int currentValue =
-                                                                int.parse(
-                                                                    _controller2
-                                                                        .text);
-                                                            setState(() {
-                                                              print(
-                                                                  "Setting state");
-                                                              currentValue--;
-                                                              _controller2
-                                                                      .text =
-                                                                  (currentValue)
-                                                                      .toString(); // decrementing value
-                                                            });
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Spacer(
-                                                      flex: 1,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )),
-                                        //! DO NOT CHANGE
-                                        Expanded(
-                                            child: Container(
-                                          child: Column(
-                                            children: [
-                                              const Row(
-                                                children: [
-                                                  Text(
-                                                    "temp",
-                                                    style: TextStyle(
+                                                const SizedBox(height: 10),
+                                                Container(
+                                                  height: (screenSize.height *
+                                                          0.050)
+                                                      .clamp(minHeight,
+                                                          double.infinity),
+                                                  width:
+                                                      (screenSize.width * 0.21)
+                                                          .clamp(minWidth,
+                                                              double.infinity),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
                                                         color: AppColors
-                                                            .lightGreyColor),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Container(
-                                                        height: 10,
+                                                            .iconColor
+                                                            .withOpacity(.2),
+                                                        width: .5,
                                                       ),
+                                                      color: Colors.black
+                                                          .withOpacity(.2),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  child:
+                                                      DropdownButtonFormField<
+                                                          String>(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    iconEnabledColor:
+                                                        Colors.white,
+                                                    iconDisabledColor:
+                                                        Colors.white,
+                                                    style: const TextStyle(
+                                                      color:
+                                                          AppColors.iconColor,
                                                     ),
-                                                  ],
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      enabledBorder:
+                                                          InputBorder.none,
+                                                    ),
+                                                    dropdownColor:
+                                                        AppColors.primaryColor,
+                                                    value: dropdownValue,
+                                                    items: <String>[
+                                                      'Select an option',
+                                                      'Assam',
+                                                      'Karnataka',
+                                                      'Rajasthan'
+                                                    ].map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(
+                                                          value,
+                                                          style: const TextStyle(
+                                                              fontFamily:
+                                                                  CustomLabels
+                                                                      .primaryFont,
+                                                              color: AppColors
+                                                                  .iconColor,
+                                                              fontSize: 13),
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged:
+                                                        (String? newValue) {
+                                                      dropdownValue = newValue!;
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        )),
-                                        //! DO NOT CHANGED ------------------
+                                        ))
                                       ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ]),
+                      ),
+                    ),
+
+                    // ! 3rd row
+
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20.0, left: 20, bottom: 8, top: 8),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGreyColor,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 0.3,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: AutoSizeText(
+                                          'Location',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                color: Colors.white,
+                                thickness: 0.3,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20.0,
+                                          left: 20,
+                                          bottom: 4,
+                                          top: 4),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              child: Container(
+                                            child: Column(
+                                              children: [
+                                                const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Lattitude",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                CustomTextField(
+                                                  inputType: CustomTextInputType
+                                                      .number,
+                                                  controller: nameController,
+                                                  width: screensize.width,
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: Column(
+                                              children: [
+                                                const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Longitude",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                CustomTextField(
+                                                  inputType: CustomTextInputType
+                                                      .number,
+                                                  controller: nameController,
+                                                  width: screensize.width,
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                          //! DO NOT CHANGE
+                                          Expanded(
+                                              child: Container(
+                                            child: Column(
+                                              children: [
+                                                const Row(
+                                                  children: [
+                                                    Text(
+                                                      "temp",
+                                                      style: TextStyle(
+                                                          color: AppColors
+                                                              .lightGreyColor),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Container(
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Container(
+                                                          height: 10,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                          //! DO NOT CHANGED ------------------
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ]),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: Container(
+                            width: 150,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.baseColor,
+                                  width: 0.5,
+                                ),
+                                color: AppColors.baseColor,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Save changes",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ]),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: Container(
-                          width: 150,
+                          ),
+                        ),
+                        Container(
+                          width: 90,
                           decoration: BoxDecoration(
                               border: Border.all(
-                                color: AppColors.baseColor,
+                                color: Colors.white,
                                 width: 0.5,
                               ),
-                              color: AppColors.baseColor,
+                              color: AppColors.darkColor,
                               borderRadius: BorderRadius.circular(8)),
                           child: const Center(
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                "Save changes",
+                                "Cancel",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -1000,36 +912,13 @@ class _NewEditTenantDialogScreen extends State<NewEditTenantDialogScreen> {
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        width: 90,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 0.5,
-                            ),
-                            color: AppColors.darkColor,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                ],
+                      ]),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ));
- 
+        ));
   }
 }
