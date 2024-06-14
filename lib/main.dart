@@ -7,7 +7,9 @@ import 'package:pos_admin/features/home/logout/bloc/logout_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/roles/bloc/role_list/role_list_bloc.dart';
 import 'package:pos_admin/features/home/tenants/bloc/tenant_list/tenant_list_bloc.dart';
+import 'package:pos_admin/features/home/tenants/cubits/tenant_search/tenantsearch_cubit.dart';
 import 'package:pos_admin/features/home/users/bloc/new_user/new_user_bloc.dart';
+import 'package:pos_admin/features/home/users/cubits/search/search_cubit.dart';
 import 'core/common/colors.dart';
 import 'features/auth/domain/repository/login_repository.dart';
 import 'features/auth/presentation/bloc/password_validation/password_validation_bloc.dart';
@@ -32,6 +34,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => RoleListBloc()),
         BlocProvider(create: (context) => NewUserBloc()),
         BlocProvider(create: (context) => LogoutBloc()),
+        BlocProvider(create: (context) => SearchCubit()),
+        BlocProvider(create: (context) => TenantsearchCubit()),
+
+
 
         BlocProvider<EmailTextFieldValidationBloc>(
           create: (context) =>

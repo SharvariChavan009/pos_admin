@@ -1,18 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/colors.dart';
+import 'package:pos_admin/features/home/tenants/cubits/tenant_search/tenantsearch_cubit.dart';
+import 'package:pos_admin/features/home/users/cubits/search/search_cubit.dart';
+
+late String val;
 
 class CommonSearchBar extends StatefulWidget {
-  const CommonSearchBar({super.key});
+  const CommonSearchBar({
+    super.key,
+  });
 
   @override
   State<CommonSearchBar> createState() => _CommonSearchBarState();
 }
 
 class _CommonSearchBarState extends State<CommonSearchBar> {
+
+
   @override
   Widget build(BuildContext context) {
+    
     return TextFormField(
+      onChanged: (value) {
+        val = value;
+        BlocProvider.of<SearchCubit>(context).searchFunctio(val);
+        BlocProvider.of<TenantsearchCubit>(context).searchFunctio(val);
+      },
       style: const TextStyle(color: AppColors.iconColor, fontSize: 14),
       decoration: InputDecoration(
         isDense: true,
