@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:pos_admin/core/common/colors.dart';
+import 'package:pos_admin/core/common/cubits/Textfield_validation/textfield_validation_cubit.dart';
+import 'package:pos_admin/core/common/validation_variables.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
 
@@ -12,6 +16,7 @@ class NewPermissionCreation extends StatefulWidget {
 }
 
 class _NewPermissionCreationState extends State<NewPermissionCreation> {
+  TextEditingController permissionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //! ------------------------------------
@@ -72,35 +77,60 @@ class _NewPermissionCreationState extends State<NewPermissionCreation> {
 
                   //! Section Two
 
-                  Container(
-                    child: const Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name",
-                              style: TextStyle(color: Colors.white),
+                  BlocBuilder<TextfieldValidationCubit,
+                      TextfieldValidationState>(
+                    builder: (context, state) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Name",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "*",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                SizedBox(
+                                  width: screenWidth * 0.34,
+                                  child: CustomTextField(
+                                    controller: permissionController,
+                                    borderColor: (state is TextValidationError
+                                        ? Colors.red
+                                        : AppColors.iconColor.withOpacity(0.2)),
+                                  ),
+                                ),
+                                const SizedBox(height: 1),
+                                Visibility(
+                                    visible: state is TextValidationError,
+                                    child: (state is TextValidationError)
+                                        ? Text(
+                                            state.message,
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 12),
+                                          )
+                                        : Text("")),
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(2.0),
-                              child: Text(
-                                "*",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: screenWidth*0.34,
-                    child: CustomTextField(
-                      controller: nameController,
-                      width: screensize.width,
-                    ),
-                  ),
+
                   const SizedBox(height: 10),
 
                   //! Section Three
@@ -108,23 +138,35 @@ class _NewPermissionCreationState extends State<NewPermissionCreation> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Row(children: [
-                      Container(
-                        width: screensize.width * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<TextfieldValidationCubit>(context)
+                              .validate(permissionController.text);
+
+                          if (ValidationAllVariables.permissionVar == true) {
+                            print("Permission Created");
+                          } else {
+                            print("Permission Failed");
+                          }
+                        },
+                        child: Container(
+                          width: screensize.width * 0.06,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.baseColor,
+                                width: 0.5,
+                              ),
                               color: AppColors.baseColor,
-                              width: 0.5,
-                            ),
-                            color: AppColors.baseColor,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Create",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Create",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),

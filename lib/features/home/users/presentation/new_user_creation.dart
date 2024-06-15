@@ -3,9 +3,20 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:pos_admin/core/common/colors.dart';
+import 'package:pos_admin/core/common/cubits/Textfield_validation/textfield_validation_cubit.dart';
+import 'package:pos_admin/core/common/cubits/confirm_password/confirmpassword_cubit.dart';
+import 'package:pos_admin/core/common/cubits/email_validation/email_cubit.dart';
+import 'package:pos_admin/core/common/cubits/mobile_validation/mobile_validation_cubit.dart';
+import 'package:pos_admin/core/common/cubits/password_validation/login_cubit.dart';
+import 'package:pos_admin/core/common/cubits/role_dropdown_validation/role_dropdown_cubit.dart';
+import 'package:pos_admin/core/common/u_validations_all.dart';
+import 'package:pos_admin/core/common/validation_variables.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/core/common/widgets/label.dart';
+import 'package:pos_admin/features/auth/presentation/login_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 TextEditingController nameController = TextEditingController();
 
@@ -17,6 +28,12 @@ class NewUser extends StatefulWidget {
 }
 
 class _NewUserState extends State<NewUser> {
+  TextEditingController unameController = TextEditingController();
+  TextEditingController uemialController = TextEditingController();
+  TextEditingController upasswordController = TextEditingController();
+  TextEditingController uconfirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // !------------------------------------
@@ -93,39 +110,190 @@ class _NewUserState extends State<NewUser> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
+                        padding: EdgeInsets.only(right: 30.0),
                         child: Container(
                           color: AppColors.darkColor,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Name",
-                                style: TextStyle(color: Colors.white),
+                              //! Name Field
+
+                              BlocBuilder<TextfieldValidationCubit,
+                                  TextfieldValidationState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        child: const Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Name",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    "*",
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      CustomTextField(
+                                        hintText: "Name",
+                                        controller: unameController,
+                                        borderColor:
+                                            (state is TextValidationError
+                                                ? Colors.red
+                                                : AppColors.iconColor
+                                                    .withOpacity(0.2)),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      Visibility(
+                                          visible: state is TextValidationError,
+                                          child: (state is TextValidationError)
+                                              ? Text(
+                                                  state.message,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                )
+                                              : Text("")),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  );
+                                },
                               ),
-                              const SizedBox(height: 1),
-                              CustomTextField(
-                                  hintText: "Name", controller: nameController),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "Phone Number",
-                                style: TextStyle(color: Colors.white),
+
+                              //! Phone number Field
+
+                              BlocBuilder<MobileValidationCubit,
+                                  MobileValidationState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Phone Number",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                "*",
+                                style: TextStyle(color: Colors.red),
                               ),
-                              const SizedBox(height: 1),
-                              CustomTextField(
-                                hintText: "Phone Number",
-                                controller: nameController,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                                      const SizedBox(height: 1),
+                                      CustomTextField(
+                                        inputType: CustomTextInputType.number,
+                                        hintText: "Phone Number",
+                                        controller: phoneController,
+                                        borderColor:
+                                            (state is MobileValidationFailure
+                                                ? Colors.red
+                                                : AppColors.iconColor
+                                                    .withOpacity(0.2)),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      Visibility(
+                                          visible:
+                                              state is MobileValidationFailure,
+                                          child:
+                                              (state is MobileValidationFailure)
+                                                  ? Text(
+                                                      state.message,
+                                                      style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 12),
+                                                    )
+                                                  : Text("")),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  );
+                                },
                               ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "Confirm Password",
-                                style: TextStyle(color: Colors.white),
+
+                              //! Confirm Password  Field
+
+                              BlocBuilder<ConfirmpasswordCubit,
+                                  ConfirmpasswordState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                     Container(
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Confirm Password",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                "*",
+                                style: TextStyle(color: Colors.red),
                               ),
-                              const SizedBox(height: 1),
-                              CustomTextField(
-                                hintText: "Confirm Password",
-                                controller: nameController,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                                      const SizedBox(height: 1),
+                                      CustomTextField(
+                                        inputType: CustomTextInputType.password,
+                                        obscureText: true,
+                                        hintText: "Confirm Password",
+                                        controller: uconfirmPasswordController,
+                                        borderColor:
+                                            (state is ConfirmpassErrorState
+                                                ? Colors.red
+                                                : AppColors.iconColor
+                                                    .withOpacity(0.2)),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      Visibility(
+                                          visible:
+                                              state is ConfirmpassErrorState,
+                                          child:
+                                              (state is ConfirmpassErrorState)
+                                                  ? Text(
+                                                      state.errorMessage,
+                                                      style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 12),
+                                                    )
+                                                  : Text("")),
+                                    ],
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -138,78 +306,218 @@ class _NewUserState extends State<NewUser> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Email",
-                                style: TextStyle(color: Colors.white),
+                              //! Email Field
+
+                              BlocBuilder<EmailCubit, EmailState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                        Container(
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Email",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                "*",
+                                style: TextStyle(color: Colors.red),
                               ),
-                              const SizedBox(height: 1),
-                              CustomTextField(
-                                  hintText: "Email",
-                                  controller: nameController),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "Password",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(height: 1),
-                              CustomTextField(
-                                hintText: "Password",
-                                controller: nameController,
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "Roles",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(height: 1),
-                              Container(
-                                height: (screenSize.height * 0.050)
-                                    .clamp(minHeight, double.infinity),
-                                width: (screenSize.width * 0.22)
-                                    .clamp(minWidth, double.infinity),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color:
-                                          AppColors.iconColor.withOpacity(.2),
-                                      width: .5,
-                                    ),
-                                    color: Colors.black.withOpacity(.2),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: DropdownButtonFormField<String>(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  iconEnabledColor: Colors.white,
-                                  iconDisabledColor: Colors.white,
-                                  style: const TextStyle(
-                                    color: AppColors.iconColor,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                  ),
-                                  dropdownColor: AppColors.primaryColor,
-                                  value: dropdownValue,
-                                  items: <String>[
-                                    'Select an option',
-                                    'Customer',
-                                    'Manager',
-                                    'Owner'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: const TextStyle(
-                                            fontFamily:
-                                                CustomLabels.primaryFont,
-                                            color: AppColors.iconColor,
-                                            fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                                      const SizedBox(height: 1),
+                                      CustomTextField(
+                                        hintText: "Email",
+                                        controller: uemialController,
+                                        borderColor:
+                                            (state is EmailValidatorState
+                                                ? Colors.red
+                                                : AppColors.iconColor
+                                                    .withOpacity(0.2)),
                                       ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (String? newValue) {
-                                    dropdownValue = newValue!;
-                                  },
-                                ),
+                                      const SizedBox(height: 10),
+                                      Visibility(
+                                          visible: state is EmailValidatorState,
+                                          child: (state is EmailValidatorState)
+                                              ? Text(
+                                                  state.errorMessage2,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                )
+                                              : Text("")),
+                                    ],
+                                  );
+                                },
+                              ),
+
+                              //! Password Field
+
+                              BlocBuilder<PasswordCubit, PasswordState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Password",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                "*",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                                      const SizedBox(height: 1),
+                                      CustomTextField(
+                                        inputType: CustomTextInputType.password,
+                                        obscureText: true,
+                                        hintText: "Password",
+                                        controller: upasswordController,
+                                        borderColor: (state is ErrorState1
+                                            ? Colors.red
+                                            : AppColors.iconColor
+                                                .withOpacity(0.2)),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      Visibility(
+                                          visible: state is ErrorState1,
+                                          child: (state is ErrorState1)
+                                              ? Text(
+                                                  state.errorMessage2,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                )
+                                              : Text("")),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  );
+                                },
+                              ),
+
+                              //! Role Field
+
+                              BlocBuilder<RoleDropdownCubit, RoleDropdownState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Roles",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                "*",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                                      const SizedBox(height: 1),
+                                      Container(
+                                        height: (screenSize.height * 0.050)
+                                            .clamp(minHeight, double.infinity),
+                                        width: (screenSize.width * 0.22)
+                                            .clamp(minWidth, double.infinity),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: (state is RoleDropdownError
+                                                  ? Colors.red
+                                                  : AppColors.iconColor
+                                                      .withOpacity(0.2)),
+                                              width: .5,
+                                            ),
+                                            color: Colors.black.withOpacity(.2),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: DropdownButtonFormField<String>(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          iconEnabledColor: Colors.white,
+                                          iconDisabledColor: Colors.white,
+                                          style: TextStyle(
+                                            color: dropdownValue ==
+                                                    "Select an option"
+                                                ? AppColors.iconColor
+                                                : Colors.white,
+                                          ),
+                                          decoration: const InputDecoration(
+                                            enabledBorder: InputBorder.none,
+                                          ),
+                                          dropdownColor: AppColors.primaryColor,
+                                          value: dropdownValue,
+                                          items: <String>[
+                                            'Select an option',
+                                            'Customer',
+                                            'Manager',
+                                            'Owner'
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: TextStyle(
+                                                    fontFamily: CustomLabels
+                                                        .primaryFont,
+                                                    color: Colors.white,
+                                                    fontSize: 13),
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            dropdownValue = newValue!;
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(height: 1),
+                                      Visibility(
+                                          visible: state is RoleDropdownError,
+                                          child: (state is RoleDropdownError)
+                                              ? Text(
+                                                  state.message,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                )
+                                              : Text("")),
+                                    ],
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -493,37 +801,73 @@ class _NewUserState extends State<NewUser> {
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Row(children: [
-                  // CustomButton(
-                  //   backgroundColor: Colors.white,
-                  //   textColor: Colors.black,
-                  //   text: "Create",
-                  //   onPressed: () {
-                  //     BlocProvider.of<NewUserBloc>(context)
-                  //         .add(NewUserCreatePressedEvent());
-                  //   },
-                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      //* Name Field
+                      BlocProvider.of<TextfieldValidationCubit>(context)
+                          .validate(unameController.text);
 
-                  Container(
-                    width: 90,
-                    decoration: BoxDecoration(
-                        border: Border.all(
+                      //* Phone number Field
+
+                      BlocProvider.of<MobileValidationCubit>(context)
+                          .validateMobileNumber(phoneController.text);
+
+                      //* Confirm password Field
+
+                      BlocProvider.of<ConfirmpasswordCubit>(context)
+                          .ConfirmPassFunction(upasswordController.text,
+                              uconfirmPasswordController.text);
+
+                      //* Email Field
+
+                      BlocProvider.of<EmailCubit>(context)
+                          .Loginvalidation1(uemialController.text);
+
+                      //* Password Field
+
+                      BlocProvider.of<PasswordCubit>(context)
+                          .Loginvalidation(upasswordController.text);
+
+                      //* Role Field
+
+                      BlocProvider.of<RoleDropdownCubit>(context)
+                          .dropdownFunction(dropdownValue);
+
+                      if (ValidationAllVariables.confirmpasswordVar == true &&
+                          ValidationAllVariables.dropdownVar == true &&
+                          ValidationAllVariables.emailVar == true &&
+                          ValidationAllVariables.mobileVar == true &&
+                          ValidationAllVariables.passwordVar == true &&
+                          ValidationAllVariables.textVar == true) {
+                        print("user Created Successfully");
+                      } else {
+                        print("user Creation Failed");
+                      }
+
+// ----------------------
+                    },
+                    child: Container(
+                      width: 90,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColors.baseColor,
+                            width: 0.5,
+                          ),
                           color: AppColors.baseColor,
-                          width: 0.5,
-                        ),
-                        color: AppColors.baseColor,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Create",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Create",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Container(
@@ -548,7 +892,6 @@ class _NewUserState extends State<NewUser> {
                       ),
                     ),
                   ),
-
                   Container(
                     width: 90,
                     decoration: BoxDecoration(
@@ -569,9 +912,7 @@ class _NewUserState extends State<NewUser> {
                       ),
                     ),
                   ),
-                ]
-                )
-                ,
+                ]),
               ),
             ],
           ),
