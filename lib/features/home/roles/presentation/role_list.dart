@@ -255,8 +255,9 @@ class OrderDataSource extends DataTableSource {
               },
               child: const Row(children: [
                 Icon(
-                  Icons.delete_forever,
-                  color: Colors.red,
+                  Icons.delete,
+                  color: AppColors.iconColor,
+               
                 ),
                 SizedBox(width: 4),
                 Text(

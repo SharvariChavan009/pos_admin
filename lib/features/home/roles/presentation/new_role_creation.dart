@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/colors.dart';
+import 'package:pos_admin/core/common/cubits/Textfield_validation/textfield_validation_cubit.dart';
+import 'package:pos_admin/core/common/validation_variables.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
 
@@ -16,6 +18,7 @@ class NewRoleCreation extends StatefulWidget {
 }
 
 class _NewRoleCreationState extends State<NewRoleCreation> {
+  TextEditingController roleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //! ------------------------------------
@@ -30,7 +33,7 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
       backgroundColor: AppColors.lightGreyColor,
       child: SizedBox(
         width: screensize.width * 0.6, // 80% of screen width
-        height: screensize.height * 0.45, // 50% of screen height
+        height: screensize.height * 0.46, // 50% of screen height
 
         child: Container(
           decoration: BoxDecoration(
@@ -78,32 +81,61 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
 
                   //! Section Two
 
-                  Container(
-                    child: const Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name",
-                              style: TextStyle(color: Colors.white),
+                  BlocBuilder<TextfieldValidationCubit,
+                      TextfieldValidationState>(
+                    builder: (context, state) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: const Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Name",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "*",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(2.0),
-                              child: Text(
-                                "*",
-                                style: TextStyle(color: Colors.red),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: roleController,
+                                  borderColor: (state is TextValidationError
+                                      ? Colors.red
+                                      : AppColors.iconColor.withOpacity(0.2)),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                            ],
+                          ),
+                          const SizedBox(height: 1),
+                          Visibility(
+                              visible: state is TextValidationError,
+                              child: (state is TextValidationError)
+                                  ? Text(
+                                      state.message,
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 12),
+                                    )
+                                  : Text("")),
+                        ],
+                      );
+                    },
                   ),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: nameController,
-                    width: screensize.width,
-                  ),
+
                   const SizedBox(height: 10),
 
                   const Text(
@@ -123,23 +155,35 @@ class _NewRoleCreationState extends State<NewRoleCreation> {
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
                     child: Row(children: [
-                      Container(
-                        width: screensize.width * 0.06,
-                        decoration: BoxDecoration(
-                            border: Border.all(
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<TextfieldValidationCubit>(context)
+                              .validate(roleController.text);
+
+                          if (ValidationAllVariables.roleVar == true) {
+                            print("Role Created");
+                          } else {
+                            print("Role Failed");
+                          }
+                        },
+                        child: Container(
+                          width: screensize.width * 0.06,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.baseColor,
+                                width: 0.5,
+                              ),
                               color: AppColors.baseColor,
-                              width: 0.5,
-                            ),
-                            color: AppColors.baseColor,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Create",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Create",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),

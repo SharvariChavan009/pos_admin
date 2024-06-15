@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_admin/core/common/cubits/Textfield_validation/textfield_validation_cubit.dart';
+import 'package:pos_admin/core/common/cubits/confirm_password/confirmpassword_cubit.dart';
+import 'package:pos_admin/core/common/cubits/email_validation/email_cubit.dart';
+import 'package:pos_admin/core/common/cubits/mobile_validation/mobile_validation_cubit.dart';
+import 'package:pos_admin/core/common/cubits/password_validation/login_cubit.dart';
+import 'package:pos_admin/core/common/cubits/role_dropdown_validation/role_dropdown_cubit.dart';
+
 import 'package:pos_admin/core/routes/router.dart';
 import 'package:pos_admin/features/auth/presentation/bloc/email_validation/email_validation_bloc.dart';
 import 'package:pos_admin/features/auth/presentation/login_page.dart';
@@ -26,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers:[
+      providers: [
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => MenuNameBloc()),
         BlocProvider(create: (context) => UserListBloc()),
@@ -37,15 +44,25 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => TenantsearchCubit()),
 
+        // Validation Cubits
+
+        BlocProvider(create: (context) => EmailCubit()),
+        BlocProvider(create: (context) => MobileValidationCubit()),
+        BlocProvider(create: (context) => PasswordCubit()),
+        BlocProvider(create: (context) => TextfieldValidationCubit()),
+        BlocProvider(create: (context) => RoleDropdownCubit()),
+        BlocProvider(create: (context) => ConfirmpasswordCubit()),
 
 
-        BlocProvider<EmailTextFieldValidationBloc>(
-          create: (context) =>
-              EmailTextFieldValidationBloc(borderColor: AppColors.secondaryColor),
-        ),
+        
+        // -----------
         BlocProvider<PasswordValidationBloc>(
           create: (context) =>
               PasswordValidationBloc(borderColor: AppColors.secondaryColor),
+        ),
+        BlocProvider<EmailTextFieldValidationBloc>(
+          create: (context) => EmailTextFieldValidationBloc(
+              borderColor: AppColors.secondaryColor),
         ),
       ],
       child: MaterialApp.router(
@@ -56,7 +73,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routerConfig: router,
-
       ),
     );
   }

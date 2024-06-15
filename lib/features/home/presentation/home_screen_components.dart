@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_admin/core/common/widgets/c_searchbar.dart';
 import 'package:pos_admin/core/common/widgets/w_custom_button.dart';
 import 'package:pos_admin/features/home/dashboard/presentation/dashboard_screen.dart';
+import 'package:pos_admin/features/home/permissions/presentation/dialog_screen/edit_permission_screen.dart';
 import 'package:pos_admin/features/home/permissions/presentation/new_permission_creation.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_admin/features/home/presentation/bloc/menu_name_state.dart';
@@ -444,6 +445,8 @@ Widget middleBody(TabController tabController) {
                     flex: 11,
                     child: PermisionListSetting(),
                     //! child: NewPermissionCreation(),
+                    //! child: EditPermissionScreen(),
+
                   )
                 ],
               );

@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:pos_admin/core/common/colors.dart';
+import 'package:pos_admin/core/common/cubits/Textfield_validation/textfield_validation_cubit.dart';
+import 'package:pos_admin/core/common/validation_variables.dart';
 import 'package:pos_admin/core/common/widgets/c_text_field.dart';
 import 'package:pos_admin/features/home/users/presentation/new_user_creation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewTenantCreation extends StatefulWidget {
   const NewTenantCreation({super.key});
@@ -12,6 +16,7 @@ class NewTenantCreation extends StatefulWidget {
 }
 
 class _NewTenantCreationState extends State<NewTenantCreation> {
+  TextEditingController tenantNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //! ------------------------------------
@@ -35,17 +40,63 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                   child: Column(
                     //! section One
 
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Name",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        hintText: "Name",
-                        controller: nameController,
-                        width: screensize.width,
+                      Container(
+                        child: Column(
+                          children: [
+                            BlocBuilder<TextfieldValidationCubit,
+                                TextfieldValidationState>(
+                              builder: (context, state) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Name",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.all(2.0),
+                                          child: Text(
+                                            "*",
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CustomTextField(
+                                            controller: tenantNameController,
+                                            borderColor:
+                                                (state is TextValidationError
+                                                    ? Colors.red
+                                                    : AppColors.iconColor
+                                                        .withOpacity(0.2)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 1),
+                                    Visibility(
+                                        visible: state is TextValidationError,
+                                        child: (state is TextValidationError)
+                                            ? Text(
+                                                state.message,
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12),
+                                              )
+                                            : Text("")),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
 
                       //! section Two
@@ -107,9 +158,8 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                                   Row(
                                     children: [
                                       CustomTextField(
-                                        controller: nameController,
-                                        width: screensize.width * 0.3
-                                      ),
+                                          controller: nameController,
+                                          width: screensize.width * 0.3),
                                     ],
                                   )
                                 ],
@@ -190,23 +240,36 @@ class _NewTenantCreationState extends State<NewTenantCreation> {
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: Row(children: [
-                          Container(
-                            width: screensize.width * 0.06,
-                            decoration: BoxDecoration(
-                                border: Border.all(
+                          GestureDetector(
+                            onTap: () {
+                              //* Name Field
+                              BlocProvider.of<TextfieldValidationCubit>(context)
+                                  .validate(tenantNameController.text);
+
+                              if (ValidationAllVariables.tenantuserVar == true) {
+                                print("Create Tenant..");
+                              } else {
+                                print("Failed Tenant..");
+                              }
+                            },
+                            child: Container(
+                              width: screensize.width * 0.06,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.baseColor,
+                                    width: 0.5,
+                                  ),
                                   color: AppColors.baseColor,
-                                  width: 0.5,
-                                ),
-                                color: AppColors.baseColor,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: const Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Create",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Create",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ),

@@ -235,12 +235,12 @@ class OrderDataSource extends DataTableSource {
               },
               child: const Row(children: [
                 Icon(
-                  Icons.remove_red_eye_outlined,
+                  Icons.edit_note,
                   color: AppColors.iconColor,
                 ),
                 SizedBox(width: 4),
                 Text(
-                  'View',
+                  'Edit',
                   style: TextStyle(
                       fontFamily: CustomLabels.primaryFont,
                       color: AppColors.secondaryColor),
@@ -253,12 +253,12 @@ class OrderDataSource extends DataTableSource {
               },
               child: const Row(children: [
                 Icon(
-                  Icons.edit_note,
+                  Icons.delete,
                   color: AppColors.iconColor,
                 ),
                 SizedBox(width: 4),
                 Text(
-                  'Edit',
+                  'Delete',
                   style: TextStyle(
                       fontFamily: CustomLabels.primaryFont,
                       color: AppColors.secondaryColor),
